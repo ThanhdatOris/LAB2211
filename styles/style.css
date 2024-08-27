@@ -22,9 +22,6 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    .container{
-        /*chỉnh cái text what's up cho nó đừng đè lên tên m đi Khoa :))*/
-    }
 }
 
 .layer {
@@ -49,9 +46,13 @@ h1 {
     margin: 0;
 }
 
-#oris, #sinoo, #ariety{
+#oris,
+#sinoo,
+#ariety {
     display: flexbox;
     position: relative;
+    top: 20%;
+
     .container {
         margin: 100px auto;
         max-width: 600px;
@@ -60,14 +61,16 @@ h1 {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         border-radius: 20px;
     }
+
     z-index: 9;
-    .youtube-embed iframe{
+
+    .youtube-embed iframe {
         width: 100%;
         height: 300px;
         border-radius: 10px;
     }
-    
-    .tiktok-embed{
+
+    .tiktok-embed {
         border-radius: 10px;
         margin: 0 0 0 0;
     }
@@ -108,7 +111,7 @@ h1 {
 .say-hello {
     font-family: 'Calligraffitti', cursive;
     font-weight: 700px;
-    font-size: 4rem;
+    font-size: 5rem;
     position: relative;
     text-shadow: -15px 5px 20px #ced0d3;
     top: 10%;
@@ -117,7 +120,7 @@ h1 {
     letter-spacing: 0.02em;
     text-align: center;
     color: #F9f1cc;
-    text-shadow: 
+    text-shadow:
         5px 5px 0px #FFB650,
         10px 10px 0px #FFD662,
         15px 15px 0px #FF80BF,
@@ -125,13 +128,14 @@ h1 {
         25px 25px 0px #6868AC,
         30px 30px 0px #90B1E0;
 }
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
         text-align: center;
     }
-    
+
     nav ul li {
         display: block;
         margin: 10px 0;
