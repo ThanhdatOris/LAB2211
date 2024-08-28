@@ -1,7 +1,7 @@
 # 🌟 LAB2211 🌟
 
 **📚 Đồ án 1 - Ngành Hệ Thống Thông Tin**  
-**Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ (CTUT)**
+**Trường Đại Học Kỹ Thuật - Công Nghệ Cần Thơ CTUT**
 
 ---
 
@@ -15,14 +15,13 @@
 ---
 
 ## 📖 **Giới thiệu**
-Đây là repo dành cho đồ án 1 của nhóm, thuộc chuyên ngành Hệ Thống Thông Tin. Mục tiêu của đồ án là [mô tả ngắn gọn mục tiêu dự án].
+Đây là repo dành cho Đồ án 1 của nhóm, thuộc chuyên ngành Hệ Thống Thông Tin. Mục tiêu của đồ án là xây dựng web bán hàng của cửa hàng VLXD Thiên Ân bằng công nghệ ASP.NET và SQL Server!
 
 ---
 
 ## ⚙️ **Cài đặt**
 Hướng dẫn cài đặt cho dự án:
-*SQL Server
-*ASP.NET
+
 ```bash
 # Clone repository
 git clone https://github.com/ThanhdatOris/LAB2211.git
