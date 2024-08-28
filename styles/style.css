@@ -162,7 +162,7 @@ h1 {
     }
 }
 
-  /* Responsive Styles for Mobile */
+/* Responsive Styles for Mobile */
 @media (max-width: 480px) {
     body {
       font-size: 30px; /* Further reduce font size for mobile */
