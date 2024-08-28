@@ -15,7 +15,7 @@
 ---
 
 ## 📖 **Giới thiệu**
-Đây là repo dành cho Đồ án 1 của nhóm, thuộc chuyên ngành Hệ Thống Thông Tin. Mục tiêu của đồ án là xây dựng web bán hàng của cửa hàng VLXD Thiên Ân bằng công nghệ ASP.NET và SQL Server!
+Đây là repo dành cho Đồ án 1 của nhóm, thuộc chuyên ngành Hệ Thống Thông Tin. Mục tiêu của đồ án là xây dựng web bán hàng của cửa hàng VLXD Thiên Ân bằng công nghệ **ASP.NET** và **SQL Server**!
 
 ---
 
