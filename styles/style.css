@@ -102,6 +102,10 @@ h1 {
 
 .facebook-embed iframe{
     border-radius: 10px;
+    width: 100%;
+    min-height: 300px;
+    max-height: max-content;
+    border: 0px
 }
 
 /*Font Import*/
