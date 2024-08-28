@@ -86,17 +86,22 @@ h1 {
     }
 
     z-index: 9;
+}
 
-    .youtube-embed iframe {
-        width: 100%;
-        height: 300px;
-        border-radius: 10px;
-    }
+/*Embed*/
+.youtube-embed iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+}
 
-    .tiktok-embed {
-        border-radius: 10px;
-        margin: 0 0 0 0;
-    }
+.tiktok-embed {
+    border-radius: 10px;
+    margin: 0 0 0 0;
+}
+
+.facebook-embed iframe{
+    border-radius: 10px;
 }
 
 /*Font Import*/
@@ -171,8 +176,12 @@ h1 {
         height: 250px; /* Further reduce video/embed height */
     }
 
-    h1, h3 {
+    h1 {
       font-size: 1.5em; /* Scale down section headings */
+    }
+
+    h3 {
+        font-size: 1em; /* Scale down section headings */
     }
 
     .container {
