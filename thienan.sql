@@ -3,14 +3,14 @@ CREATE DATABASE ThienAn;
 USE ThienAn;
 
 -- Bảng Role
-CREATE TABLE Role (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE MyRole (
+    id INT PRIMARY KEY AUTO INCREMENT,
     name VARCHAR(255) NOT NULL
 );
 
 -- Bảng User
-CREATE TABLE User (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE MyUser (
+    id INT PRIMARY KEY AUTO INCREMENT,
     role_id INT,
     fullname VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20),
@@ -20,12 +20,12 @@ CREATE TABLE User (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (role_id) REFERENCES Role(id)
+    FOREIGN KEY (role_id) REFERENCES MyRole(id)
 );
 
 -- Bảng Supplier
 CREATE TABLE Supplier (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     display_name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
     phone VARCHAR(20)
@@ -33,19 +33,19 @@ CREATE TABLE Supplier (
 
 -- Bảng Category
 CREATE TABLE Category (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     name VARCHAR(255) NOT NULL
 );
 
 -- Bảng Gallery
 CREATE TABLE Gallery (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     image VARCHAR(255)
 );
 
 -- Bảng Product
-CREATE TABLE Product (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE MyProduct (
+    id INT PRIMARY KEY AUTO INCREMENT,
     category_id INT,
     gallery_id INT,
     supplier_id INT,
@@ -63,7 +63,7 @@ CREATE TABLE Product (
 
 -- Bảng Import
 CREATE TABLE Import (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     supplier_id INT,
     import_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     quantity INT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE Import (
 
 -- Bảng Import_Detail
 CREATE TABLE Import_Detail (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     import_id INT,
     product_id INT,
     quantity INT NOT NULL,
@@ -81,12 +81,12 @@ CREATE TABLE Import_Detail (
     total_price DECIMAL(10, 2) NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
     FOREIGN KEY (import_id) REFERENCES Import(id),
-    FOREIGN KEY (product_id) REFERENCES Product(id)
+    FOREIGN KEY (product_id) REFERENCES MyProduct(id)
 );
 
 -- Bảng Order
-CREATE TABLE `Order` (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE MyOrder (
+    id INT PRIMARY KEY AUTO INCREMENT,
     user_id INT,
     fullname VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20),
@@ -97,12 +97,12 @@ CREATE TABLE `Order` (
     total_price DECIMAL(10, 2) NOT NULL,
     payment_method VARCHAR(100) NOT NULL,
     payment_status VARCHAR(50) NOT NULL DEFAULT 'unpaid',
-    FOREIGN KEY (user_id) REFERENCES User(id)
+    FOREIGN KEY (user_id) REFERENCES MyUser(id)
 );
 
 -- Bảng Order_Detail
 CREATE TABLE Order_Detail (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO INCREMENT,
     order_id INT,
     product_id INT,
     import_id INT,
@@ -110,7 +110,7 @@ CREATE TABLE Order_Detail (
     quantity INT NOT NULL,
     date_output TIMESTAMP,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
-    FOREIGN KEY (order_id) REFERENCES `Order`(id),
-    FOREIGN KEY (product_id) REFERENCES Product(id),
+    FOREIGN KEY (order_id) REFERENCES MyOrder(id),
+    FOREIGN KEY (product_id) REFERENCES MyProduct(id),
     FOREIGN KEY (import_id) REFERENCES Import(id)
 );
