@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Calligraffitti&display=swap');
 
+/*Base style*/
 html {}
 
 body {
@@ -18,13 +19,7 @@ body {
     margin: 0;
 }
 
-#main {
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
+/*Overlay Layer*/
 .layer {
     position: fixed;
     width: 100%;
@@ -35,16 +30,44 @@ body {
     z-index: 1;
 }
 
+/*Heading Style*/
 h1 {
     color: rgb(147, 53, 229);
     text-align: center;
     font-size: 2em;
     margin-top: 20vh;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
 }
 
-h1 {
-    margin: 0;
+/*Special Heading*/
+.say-hello {
+    font-family: 'Calligraffitti', cursive;
+    font-weight: 700px;
+    font-size: 5rem;
+    position: relative;
+    text-shadow: -15px 5px 20px #ced0d3;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #F9f1cc;
+    text-shadow:
+        5px 5px 0px #FFB650,
+        10px 10px 0px #FFD662,
+        15px 15px 0px #FF80BF,
+        20px 20px 0px #EF5097,
+        25px 25px 0px #6868AC,
+        30px 30px 0px #90B1E0;
+}
+
+/*Section Style*/
+#main {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 #oris,
@@ -76,11 +99,13 @@ h1 {
     }
 }
 
+/*Font Import*/
 @font-face {
     font-family: 'Rocher';
     src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
 }
 
+/*Font Palette*/
 @font-palette-values --Grays {
     font-family: Rocher;
     base-palette: 9;
@@ -108,51 +133,59 @@ h1 {
     font-palette: --Mint;
 }
 
-.say-hello {
-    font-family: 'Calligraffitti', cursive;
-    font-weight: 700px;
-    font-size: 5rem;
-    position: relative;
-    text-shadow: -15px 5px 20px #ced0d3;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 0.02em;
-    text-align: center;
-    color: #F9f1cc;
-    text-shadow:
-        5px 5px 0px #FFB650,
-        10px 10px 0px #FFD662,
-        15px 15px 0px #FF80BF,
-        20px 20px 0px #EF5097,
-        25px 25px 0px #6868AC,
-        30px 30px 0px #90B1E0;
-}
-
-/* Responsive Styles */
+/* Responsive Styles for Tablets */
 @media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        text-align: center;
+    body {
+      font-size: 40px; /* Reduce base font size for tablets */
     }
 
-    nav ul li {
-        display: block;
-        margin: 10px 0;
+    .say-hello {
+      font-size: 4rem; /* Adjust font size of main heading */
+    }
+
+    .youtube-embed iframe,
+    .tiktok-embed blockquote {
+      height: 200px; /* Reduce video/embed height for smaller screens */
+    }
+    
+    .container {
+      padding: 20px; /* Add padding for better spacing on smaller screens */
+    }
+}
+
+  /* Responsive Styles for Mobile */
+@media (max-width: 480px) {
+    body {
+      font-size: 30px; /* Further reduce font size for mobile */
+    }
+
+    .say-hello {
+      font-size: 3rem; /* Adjust main heading for mobile */
+    }
+
+    .youtube-embed iframe {
+      height: 150px; /* Further reduce video/embed height */
+    }
+
+    .tiktok-embed blockquote {
+        height: 250px; /* Further reduce video/embed height */
+    }
+
+    h1, h3 {
+      font-size: 1.5em; /* Scale down section headings */
     }
 
     .container {
-        width: 95%;
+      padding: 15px; /* Increase padding for mobile */
+      margin: 10px 0; /* Reduce margins */
     }
-}
-
-@media (max-width: 480px) {
-
-    header h1 {
-        font-size: 1.5em;
+    
+    #main .container {
+      justify-content: flex-start; /* Align content at the top */
+      height: auto; /* Auto height for better content flow */
     }
 
-    .content {
-        padding: 15px;
+    .layer {
+      background-color: rgba(0, 0, 0, 0.7); /* Darken overlay for mobile */
     }
 }
