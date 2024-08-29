@@ -1,13 +1,16 @@
 -- Tạo database
-CREATE DATABASE ThienAn;
-USE ThienAn;
+CREATE DATABASE ThienAnDB;
 
+go
+
+USE ThienAnDB;
+go
 -- Bảng Role
 CREATE TABLE MyRole (
     id INT PRIMARY KEY IDENTITY(1,1),
     name VARCHAR(255) NOT NULL
 );
-
+go
 -- Bảng User
 CREATE TABLE MyUser (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -22,7 +25,7 @@ CREATE TABLE MyUser (
     deleted BIT DEFAULT 0,
     FOREIGN KEY (role_id) REFERENCES MyRole(id)
 );
-
+go
 -- Bảng Supplier
 CREATE TABLE Supplier (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -30,19 +33,13 @@ CREATE TABLE Supplier (
     address VARCHAR(255),
     phone VARCHAR(20)
 );
-
+go
 -- Bảng Category
 CREATE TABLE Category (
     id INT PRIMARY KEY IDENTITY(1,1),
     name VARCHAR(255) NOT NULL
 );
-
--- Bảng Gallery
-CREATE TABLE Gallery (
-    id INT PRIMARY KEY IDENTITY(1,1),
-    image VARCHAR(255)
-);
-
+go
 -- Bảng Product
 CREATE TABLE MyProduct (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -57,10 +54,17 @@ CREATE TABLE MyProduct (
     updated_at DATETIME DEFAULT GETDATE(),
     status VARCHAR(50) NOT NULL DEFAULT 'available',
     FOREIGN KEY (category_id) REFERENCES Category(id),
-    FOREIGN KEY (gallery_id) REFERENCES Gallery(id),
     FOREIGN KEY (supplier_id) REFERENCES Supplier(id)
 );
-
+go
+-- Bảng Gallery
+CREATE TABLE Gallery (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    image VARCHAR(255),
+	product_id INT,
+    FOREIGN KEY (product_id) REFERENCES MyProduct(id),
+);
+go
 -- Bảng Import
 CREATE TABLE Import (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -69,7 +73,7 @@ CREATE TABLE Import (
     quantity INT NOT NULL,
     FOREIGN KEY (supplier_id) REFERENCES Supplier(id)
 );
-
+go
 -- Bảng Import_Detail
 CREATE TABLE Import_Detail (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -83,7 +87,7 @@ CREATE TABLE Import_Detail (
     FOREIGN KEY (import_id) REFERENCES Import(id),
     FOREIGN KEY (product_id) REFERENCES MyProduct(id)
 );
-
+go
 -- Bảng Order
 CREATE TABLE MyOrder (
     id INT PRIMARY KEY IDENTITY(1,1),
@@ -99,7 +103,7 @@ CREATE TABLE MyOrder (
     payment_status VARCHAR(50) NOT NULL DEFAULT 'unpaid',
     FOREIGN KEY (user_id) REFERENCES MyUser(id)
 );
-
+go
 -- Bảng Order_Detail
 CREATE TABLE Order_Detail (
     id INT PRIMARY KEY IDENTITY(1,1),
