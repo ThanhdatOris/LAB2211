@@ -1,0 +1,175 @@
+/*  PHẦN NỘI DUNG ĐĂNG NHẬP   */
+
+Xin chào mình là Trường
+
+Dưới đây là toàn bộ thông tin của source mình:
+
+1. Đọc phần README khi tải về
+
+2. Source có bảo mật file main.js nhằm bảo mật thông tin đăng nhập
+
+3. Tính năng kiểm tra lỗi khi đăng nhập có thông báo khi nhập sai và đúng.
+
+4. Giao diện được nâng cấp phiên bản mới
+
+5. Thêm nhân viên và thêm sản phẩm mình đã viết script cho bạn có thể tải ảnh lên web
+
+6. Chức năng mô tả sản phẩm
+
+7. Kéo thả lịch trình hoạt động
+
+8. Phần mềm bán hàng viết bằng HTML mình đang code nên chưa update
+
+THÔNG TIN ĐĂNG NHẬP NÊN ĐỌC KỸ PHẦN README Ở SOURCE
+
+Tài khoản: admin - Mật khẩu: 123456
+
+Cảm ơn bạn đã theo dõi 
+
+/=========================================/
+
+
+
+/* 
+
+
+
+LƯU Ý MÌNH ĐÃ MÃ HÓA CODE FILE MAIN.JS BẠN CÓ THỂ COPY CODE BÊN DƯỚI NÀY RỒI PASTE LẠI TRONG MỤC JS TÌM ĐẾN FILE MAIN.JS GỐC ĐÃ MÃ HÓA
+
+VÀ CHỈNH SỬA LẠI THÔNG TIN ĐĂNG NHẬP, KHI BẠN THẤY ĐÃ OK RỒI THÌ CÓ THỂ MÃ HÓA LẠI FILE BẰNG WEB SAU ĐÂY
+
+
+
+https://javascriptobfuscator.com/Javascript-Obfuscator.aspx
+
+
+ CẢM ƠN BẠN ĐÃ ĐỌC <3 
+ 
+ FACEBOOK: https://www.facebook.com/truongvo.vd1503
+
+*/
+
+
+
+
+/* =========================================== */
+/* =========================================== */
+function validate() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password-field").value;
+    //Đặt 1 Admin ảo để đăng nhập quản trị
+    if (username == "admin" && password == "123456") {
+        swal({
+            title: "",
+            text: "Xin chào Võ Trường",
+            icon: "success",
+            close: true,
+            button: false,
+          });
+        window.location = "doc/index.html";
+        return true;
+       
+    }
+    //Nếu không nhập gì mà nhấn đăng nhập thì sẽ báo lỗi
+    if (username == "" && password == "") {
+        swal({
+            title: "",
+            text: "Bạn chưa điền đầy đủ thông tin đăng nhập...",
+            icon: "error",
+            close: true,
+            button: "Thử lại",
+          });
+         
+        return false;
+       
+    }
+    //Nếu không nhập mật khẩu mà đúng tài khoản 
+    if (username == "admin" && password == "") {
+        swal({
+            title: "",
+            text: "Bạn chưa nhập mật khẩu...",
+            icon: "warning",
+            close: true,
+            button: "Thử lại",
+          });
+        return false;
+    }
+    //Nếu không nhập tài khoản sẽ báo lỗi
+    if (username == null || username == "") {
+        swal({
+            title: "",
+            text: "Tài khoản đang để trống...",
+            icon: "warning",
+            close: true,
+            button: "Thử lại",
+          });
+        return false;
+    }
+    //Nếu không nhập mật khẩu sẽ báo lỗi
+    if (password == null || password == "") {
+        swal({
+            title: "",
+            text: "Mật khẩu đang để trống...",
+            icon: "warning",
+            close: true,
+            button: "Thử lại",
+          });
+        return false;
+    }
+    //Nếu trống toàn bộ thì báo lỗi
+    else {
+        swal({
+            title: "",
+            text: "Sai thông tin đăng nhập hãy kiểm tra lại...",
+            icon: "error",
+            close: true,
+            button: "Thử lại",
+          });
+        return true;
+    };
+}
+
+/*  PHẦN NỘI DUNG KHÔI PHỤC MẬT KHẨU   */
+
+/* =========================================== */
+/* =========================================== */
+//  function validate() {
+//      var email = document.getElementById("email").value;
+//     if (email == null || email == "") {
+//        swal("Bạn Chưa Nhập Email", "Vui Lòng Kiểm Tra", "warning");
+//        return false;
+//    }
+//}
+function RegexEmail(emailInputBox) {
+    var emailStr = document.getElementById(emailInputBox).value;
+    var emailRegexStr = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    var isvalid = emailRegexStr.test(emailStr);
+    if (!isvalid) {
+        swal({
+            title: "",
+            text: "Bạn vui lòng nhập đúng định dạng email...",
+            icon: "error",
+            close: true,
+            button: "Thử lại",
+          });
+        
+        emailInputBox.focus;
+    } else {
+        swal({
+            title: "",
+            text: "Chúng tôi vừa gửi cho bạn email hướng dẫn đặt lại mật khẩu vào địa chỉ cho bạn",
+            icon: "success",
+            close: true,
+            button: "Đóng",
+          });
+        emailInputBox.focus;
+        window.location = "#";
+
+    }
+}
+
+
+
+
+
+
