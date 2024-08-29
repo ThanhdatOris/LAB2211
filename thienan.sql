@@ -44,7 +44,6 @@ go
 CREATE TABLE MyProduct (
     id INT PRIMARY KEY IDENTITY(1,1),
     category_id INT,
-    gallery_id INT,
     supplier_id INT,
     title VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
