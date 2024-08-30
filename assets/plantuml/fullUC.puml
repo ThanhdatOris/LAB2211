@@ -1,0 +1,96 @@
+@startuml
+
+left to right direction
+skinparam shadowing false
+
+rectangle "Hệ Thống quản lý bán hàng và kho vật liệu xây dựng Thiên  n" {
+
+actor "Khách Hàng" as KH
+actor "Nhân Viên Quản lý" as NVQL
+actor "Nhân Viên Bán Hàng" as NVBH
+
+(Quản lý sản phẩm) as QLSP
+NVQL --> QLSP
+QLSP <-- (Xem thông tin sản phẩm): extend
+QLSP <-- (Thêm sản phẩm): extend
+QLSP <-- (Sửa sản phẩm): extend
+QLSP <-- (Tìm kiếm thông tin sản phẩm): extend
+QLSP <-- (Xóa sản phẩm): extend
+
+(Quản lý danh mục sản phẩm) as QLDMSP
+QLSP <-- QLDMSP
+QLDMSP <-- (Thêm danh mục sản phẩm): extend
+QLDMSP <-- (Sửa danh mục sản phẩm): extend
+QLDMSP <-- (Xóa danh mục sản phẩm): extend
+
+(Quản lý kho hàng) as QLKH
+NVQL --> QLKH
+QLKH <-- (Nhập hàng): extend
+QLKH <-- (Xuất hàng): extend
+QLKH <-- (Kiểm kê hàng): extend
+(Kiểm kê hàng) <-- (Xem hàng tồn kho): extend 
+
+(Quản lý nhân viên) as QLNV
+NVQL --> QLNV
+QLNV <-- (Thêm thông tin nhân viên): extend
+QLNV <-- (Sửa thông tin nhân viên): extend
+QLNV <-- (Tìm kiếm thông tin nhân viên): extend
+QLNV <-- (Phân quyền nhân viên): extend
+
+'Quản lý khách hàng
+QLKH <-- (Tìm kiếm KH): extend
+QLKH <-- (Xem lịch sử mua hàng): extend
+
+(Quản lý nhà cung cấp) as QLNCC
+NVQL --> QLNCC
+QLNCC <-- (Thêm thông tin nhà cung cấp): extend
+QLNCC <-- (Sửa thông tin nhà cung cấp): extend
+QLNCC <-- (Xóa thông tin nhà cung cấp): extend
+
+(Quản lý báo cáo) as BC
+NVQL --> BC
+BC <-- (Xem báo cáo): extend 
+BC <-- (Lập báo cáo doanh thu): extend 
+
+(Quản lý đơn hàng) as QLDH
+NVBH --> QLDH
+QLDH <-- (Xem đơn): extend
+QLDH <-- (Tìm kiếm đơn): extend
+QLDH <-- (Cập nhật thông tin đơn): extend
+
+'Quản lý sản phẩm
+NVBH --> (Xem thông tin sản phẩm): extend
+NVBH --> (Tìm kiếm thông tin sản phẩm): extend
+
+NVBH <-- (Xem hàng tồn kho): extend
+
+(Quản lý thông tin khách hàng) as QLKH
+NVBH --> QLKH
+QLKH <-- (Thêm thông tin khách hàng): extend
+QLKH <-- (Sửa thông tin khách hàng): extend
+QLKH <-- (Tìm kiếm KH): extend
+QLKH <-- (Xem lịch sử mua hàng): extend
+
+(Quản lý mua hàng) as QLMH
+QLMH <-- (Xem sản phẩm): extend
+QLMH <-- (Tìm kiếm sản phẩm): extend
+QLMH <-- (Thêm vào giỏ hàng): extend
+QLMH <-- (Đặt hàng): extend 
+QLMH <-- (Theo dõi đơn hàng): extend 
+QLMH <-- (Xem lịch sử mua hàng): extend
+KH <-- QLMH
+
+KH <-- (Đăng kí tài khoản): include
+
+'Phần chung của cả 3 Actor
+(Quản lý tài khoản) as QLTK
+QLTK <-- (Đăng nhập): extend
+QLTK <-- (Đăng xuất): extend
+QLTK <-- (Xem thông tin tài khoản): extend
+QLTK <-- (Sửa thông tin tài khoản): extend 
+NVQL --> QLTK
+NVBH --> QLTK
+KH --> QLTK
+
+}
+@enduml
