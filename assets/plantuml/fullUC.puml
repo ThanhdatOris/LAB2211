@@ -1,4 +1,4 @@
-@startuml
+@startuml UC-Diag
 
 left to right direction
 skinparam shadowing false
@@ -49,8 +49,8 @@ QLNCC <-- (Xóa thông tin nhà cung cấp): extend
 
 (Quản lý báo cáo) as BC
 NVQL --> BC
-BC <-- (Xem báo cáo): extend 
-BC <-- (Lập báo cáo doanh thu): extend 
+BC <-- (Xem báo cáo): extend
+BC <-- (Lập báo cáo doanh thu): extend
 
 (Quản lý đơn hàng) as QLDH
 NVBH --> QLDH
@@ -93,4 +93,7 @@ NVBH --> QLTK
 KH --> QLTK
 
 }
+@enduml
+@startuml
+
 @enduml
