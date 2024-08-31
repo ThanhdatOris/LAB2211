@@ -1,0 +1,61 @@
+@startuml UC-Diagram
+
+left to right direction
+skinparam shadowing false
+skinparam note {
+BorderColor #black
+BackgroundColor #white
+FontColor black
+}
+
+actor "Khách Hàng" as KH
+actor "Nhân Viên QL" as NVQL
+actor "Nhân Viên Bán Hàng" as NVBH
+
+
+
+
+rectangle "Hệ Thống QL bán hàng và kho vật liệu xây dựng Thiên Ân" {
+
+(QL sản phẩm) as QLSP
+
+(QL danh mục sản phẩm) as QLDMSP
+
+(QL kho hàng) as QLKH
+
+(QL nhân viên) as QLNV
+(Đổi mk nv) as DMKNV
+
+(QL nhà cung cấp) as QLNCC
+
+(QL khách hàng) as QLKHNV
+(Đổi mk kh) as DMKKH
+
+
+QLSP <.. (Đăng nhập): include
+QLDMSP <.. (Đăng nhập): include
+
+NVQL --> QLSP
+QLSP <.. (Tìm kiếm sản phẩm): extend
+ (Xem sản phẩm) .> (Tìm kiếm sản phẩm): extend
+(Tìm kiếm sản phẩm) <-  NVBH
+(Tìm kiếm sản phẩm) <---  KH
+
+NVQL --> QLDMSP
+NVQL --> QLKH
+
+NVQL --> QLNV
+
+DMKNV <-- NVBH
+QLNV <.. DMKNV: extend
+
+NVQL --> QLNCC
+NVQL --> QLKHNV
+
+QLKHNV <.. DMKKH: extend
+
+DMKKH <-- KH
+
+}
+
+@enduml
