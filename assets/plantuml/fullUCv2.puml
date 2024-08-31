@@ -1,0 +1,120 @@
+@startuml UC-Diagram
+
+left to right direction
+skinparam shadowing false
+skinparam note {
+BorderColor #black
+BackgroundColor #white
+FontColor black
+}
+
+rectangle "Hệ Thống QL bán hàng và kho vật liệu xây dựng Thiên Ân" {
+
+actor "Khách Hàng" as KH
+actor "Nhân Viên QL" as NVQL
+actor "Nhân Viên Bán Hàng" as NVBH
+
+' Nhân viên quản lý
+(QL sản phẩm) as QLSP
+NVQL --> QLSP
+QLSP <.. (Xem thông tin sản phẩm): extend
+QLSP <.. (Tìm kiếm thông tin sản phẩm): extend
+note right of QLSP
+- Thêm sản phẩm
+- Sửa sản phẩm
+- Xóa sản phẩm
+end note
+
+(QL danh mục sản phẩm) as QLDMSP
+QLSP <.. QLDMSP
+note right of QLDMSP
+- Thêm danh mục sản phẩm
+- Sửa danh mục sản phẩm
+- Xóa danh mục sản phẩm
+end note
+
+(QL kho hàng) as QLKH
+NVQL --> QLKH
+QLKH <.. (Nhập hàng): extend
+QLKH <.. (Xuất hàng): extend
+QLKH <.. (Kiểm kê hàng): extend
+(Kiểm kê hàng) <.. (Xem hàng tồn kho): extend
+
+(QL nhân viên) as QLNV
+NVQL --> QLNV
+QLNV <.. (Tìm kiếm thông tin nhân viên): extend
+QLNV <.. (Phân quyền nhân viên): extend
+note right of QLNV
+- Thêm thông tin nhân viên
+- Sửa thông tin nhân viên
+end note
+
+(QL nhà cung cấp) as QLNCC
+NVQL --> QLNCC
+note right of QLNCC
+- Thêm thông tin nhà cung cấp
+- Sửa thông tin nhà cung cấp
+- Xóa thông tin nhà cung cấp
+end note
+
+(QL khách hàng) as QLKHNV
+NVQL --> QLKHNV
+QLKHNV <.. (Tìm kiếm KH): extend
+QLKHNV <.. (Xem lịch sử mua hàng): extend
+
+(QL báo cáo) as BC
+NVQL --> BC
+BC <.. (Xem báo cáo): extend
+BC <.. (Lập báo cáo doanh thu): extend
+
+' Nhân viên bán hàng
+(QL đơn hàng) as QLDH
+NVBH --> QLDH
+QLDH <.. (Xem đơn): extend
+QLDH <.. (Tìm kiếm đơn): extend
+QLDH <.. (Cập nhật thông tin đơn): extend
+
+' QL sản phẩm và kho cho NVBH
+NVBH --> (Xem thông tin sản phẩm)
+NVBH --> (Tìm kiếm thông tin sản phẩm)
+NVBH --> (Xem hàng tồn kho)
+
+(QL thông tin khách hàng) as QLKH_BH
+NVBH --> QLKH_BH
+QLKH_BH <.. (Tìm kiếm KH): extend
+QLKH_BH <.. (Xem lịch sử mua hàng): extend
+note right of QLKH_BH
+- Thêm thông tin khách hàng
+- Sửa thông tin khách hàng
+end note
+
+' Khách hàng
+(QL mua hàng) as QLMH
+KH --> QLMH
+QLMH <.. (Xem sản phẩm): extend
+QLMH <.. (Tìm kiếm sản phẩm): extend
+QLMH <.. (Thêm vào giỏ hàng): extend
+QLMH <.. (Đặt hàng): extend
+QLMH <.. (Theo dõi đơn hàng): extend
+QLMH <.. (Xem lịch sử mua hàng): extend
+
+KH --> (Đăng kí tài khoản): include
+
+' Phần chung cho cả 3 Actor
+(QL tài khoản) as QLTK
+note bottom of QLTK
+- Xem thông tin tài khoản
+- Sửa thông tin tài khoản
+end note
+QLTK <.. (Đăng nhập): extend
+QLTK <.. (Đăng xuất): extend
+' QLTK <.. (Xem thông tin tài khoản): extend
+' QLTK <.. (Sửa thông tin tài khoản): extend
+
+NVQL --> QLTK
+NVBH --> QLTK
+KH --> QLTK
+
+}
+
+@enduml
