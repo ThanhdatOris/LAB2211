@@ -38,10 +38,10 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/avtHotBoy.jpg" width="50px"
         alt="User Image">
       <div>
-        <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
+        <p class="app-sidebar__user-name"><b>Sinoo</b></p>
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
@@ -68,8 +68,8 @@
       <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
             class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
       </li>
-      <li><a class="app-menu__item active" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-            class="app-menu__label">Lịch công tác </span></a></li>
+      <li><a class="app-menu__item active" href="page-calendar.html"><i
+            class='app-menu__icon bx bx-calendar-check'></i><span class="app-menu__label">Lịch công tác </span></a></li>
       <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
             đặt hệ thống</span></a></li>
     </ul>
@@ -89,123 +89,124 @@
       <div class="col-md-12">
         <div class="tile">
           <div class="tile-body">
-          <div class="row">
-            <div class="col-md-3">
-              <div id="external-events">
-                <h4 class="mb-4">Kéo sự kiện thả vào</h4>
-                <div class="fc-event"><b>Họp công ty</b></div>
-                <div class="fc-event"><b>Họp báo</b></div>
-                <div class="fc-event"><b>Mừng sinh nhật</b></div>
-                <div class="fc-event"><b>Nghĩ lễ</b></div>
-                <div class="fc-event"><b>Đi công tác</b></div>
-                <div class="fc-event"><b>Gặp khách hàng</b></div>
-                <div class="fc-event"><b>Tổ chức du lịch</b></div>
-                <p class="animated-checkbox mt-20">
-                  <label>
-                    <input id="drop-remove" type="checkbox"><span class="label-text">Hủy bỏ sau khi thả</span>
-                  </label>
-                </p>
+            <div class="row">
+              <div class="col-md-3">
+                <div id="external-events">
+                  <h4 class="mb-4">Kéo sự kiện thả vào</h4>
+                  <div class="fc-event"><b>Họp công ty</b></div>
+                  <div class="fc-event"><b>Họp báo</b></div>
+                  <div class="fc-event"><b>Mừng sinh nhật</b></div>
+                  <div class="fc-event"><b>Nghĩ lễ</b></div>
+                  <div class="fc-event"><b>Đi công tác</b></div>
+                  <div class="fc-event"><b>Gặp khách hàng</b></div>
+                  <div class="fc-event"><b>Tổ chức du lịch</b></div>
+                  <p class="animated-checkbox mt-20">
+                    <label>
+                      <input id="drop-remove" type="checkbox"><span class="label-text">Hủy bỏ sau khi thả</span>
+                    </label>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="col-md-9">
-              <div id="calendar"></div>
+              <div class="col-md-9">
+                <div id="calendar"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
-    <!-- Essential javascripts for application to work-->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="js/plugins/moment.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery-ui.custom.min.js"></script>
-    <script type="text/javascript" src="js/plugins/fullcalendar.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-      
-      	$('#external-events .fc-event').each(function() {
-      
-      		// store data so the calendar knows to render an event upon drop
-      		$(this).data('event', {
-      			title: $.trim($(this).text()), // use the element's text as the event title
-      			stick: true // maintain when user navigates (see docs on the renderEvent method)
-      		});
-      
-      		// make the event draggable using jQuery UI
-      		$(this).draggable({
-      			zIndex: 999,
-      			revert: true,      // will cause the event to go back to its
-      			revertDuration: 0  //  original position after the drag
-      		});
-      
-      	});
-      
-      	$('#calendar').fullCalendar({
-      		header: {
-      			left: 'prev,next today',
-      			center: 'title',
-      			right: 'month,agendaWeek,agendaDay'
-      		},
-      		editable: true,
-      		droppable: true, // this allows things to be dropped onto the calendar
-      		drop: function() {
-      			// is the "remove after drop" checkbox checked?
-      			if ($('#drop-remove').is(':checked')) {
-      				// if so, remove the element from the "Draggable Events" list
-      				$(this).remove();
-      			}
-      		}
-      	});
-      
-      
+  </main>
+  <!-- Essential javascripts for application to work-->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+  <!-- Page specific javascripts-->
+  <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+  <script type="text/javascript" src="js/plugins/jquery-ui.custom.min.js"></script>
+  <script type="text/javascript" src="js/plugins/fullcalendar.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('#external-events .fc-event').each(function () {
+
+        // store data so the calendar knows to render an event upon drop
+        $(this).data('event', {
+          title: $.trim($(this).text()), // use the element's text as the event title
+          stick: true // maintain when user navigates (see docs on the renderEvent method)
+        });
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 999,
+          revert: true,      // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        });
+
       });
-    </script>
-    <script type="text/javascript">
-      //Thời Gian
-      function time() {
-        var today = new Date();
-        var weekday = new Array(7);
-        weekday[0] = "Chủ Nhật";
-        weekday[1] = "Thứ Hai";
-        weekday[2] = "Thứ Ba";
-        weekday[3] = "Thứ Tư";
-        weekday[4] = "Thứ Năm";
-        weekday[5] = "Thứ Sáu";
-        weekday[6] = "Thứ Bảy";
-        var day = weekday[today.getDay()];
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        nowTime = h + " giờ " + m + " phút " + s + " giây";
-        if (dd < 10) {
-          dd = '0' + dd
-        }
-        if (mm < 10) {
-          mm = '0' + mm
-        }
-        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-          '</span>';
-        document.getElementById("clock").innerHTML = tmp;
-        clocktime = setTimeout("time()", "1000", "Javascript");
-  
-        function checkTime(i) {
-          if (i < 10) {
-            i = "0" + i;
+
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        editable: true,
+        droppable: true, // this allows things to be dropped onto the calendar
+        drop: function () {
+          // is the "remove after drop" checkbox checked?
+          if ($('#drop-remove').is(':checked')) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
           }
-          return i;
         }
+      });
+
+
+    });
+  </script>
+  <script type="text/javascript">
+    //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
       }
-    </script>
-  </body>
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+  </script>
+</body>
+
 </html>
