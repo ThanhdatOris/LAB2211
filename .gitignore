@@ -1,0 +1,5 @@
+.vscode/
+
+# Các tệp cache và build
+/bin
+/obj
