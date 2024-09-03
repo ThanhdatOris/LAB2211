@@ -13,15 +13,14 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 'Danh mục sp
 Usecase QLDMSP as "Quản lý danh mục
 --
-Thêm, sửa, xóa danh mục"
+Thêm, sửa, xóa"
 (Tìm danh mục) as TIM_DMSP
 
 'Kho hàng
-(Quản lý kho hàng) as QLKHO
-(Nhập hàng) as NHAP_HANG
-(Xuất hàng) as XUAT_HANG
-(Kiểm kê hàng) as KIEM_HANG
-(Xem hàng tồn kho)as XEM_HANG
+Usecase QLKHO as "Quản lí kho
+--
+Nhập, xuất, kiểm kê"
+(Xem hàng tồn kho) as XEM_HANG
 
 'Nhân viên
 Usecase QLNV as "Quản lý nhân viên
@@ -47,16 +46,9 @@ Thêm, sửa, xóa"
 'Đơn hàng
 Usecase QLDH as "Quản lý đơn hàng
 --
-Thêm, sửa, hủy đơn hàng"
+Thêm, sửa, hủy"
 (Tìm đơn) as TIM_DH
 (Xem đơn) as XEM_DH
-
-'Mua hàng
-Usecase QLMH as "Quản lý mua hàng
---
-Giỏ hàng, đặt hàng"
-(Theo dõi đơn hàng) as THEO_DOI_HANG
-(Xem lịch sử mua hàng) as XEM_LSMH
 
 'Sản phẩm
 Usecase QLSP as "Quản lý sản phẩm
@@ -64,6 +56,14 @@ Usecase QLSP as "Quản lý sản phẩm
 Thêm, sửa, xóa"
 (Xem sản phẩm) as XEM_SP
 (Tìm sản phẩm) as TIM_SP
+
+'Mua hàng
+Usecase QLMH as "Quản lý mua hàng
+--
+Giỏ hàng, đặt hàng,
+yêu cầu hủy đh"
+(Theo dõi đơn hàng) as THEO_DOI_HANG
+(Xem lịch sử mua hàng) as XEM_LSMH
 
 'Đăng nhập, đăng xuất
 (Đăng nhập) as Login
@@ -88,9 +88,6 @@ QLSP <.. TIM_SP: extend
 QLDMSP <.. TIM_DMSP: extend
 
 'Kho hàng
-QLKHO <.. NHAP_HANG: extend
-QLKHO <.. XUAT_HANG: extend
-QLKHO <.. KIEM_HANG: extend
 QLKHO <.. XEM_HANG: extend
 
 'Nhân viên
@@ -119,23 +116,23 @@ XEM_DH ..> QLDH: extend
 TIM_KH ..> QLKH: extend
 XEM_LSMH ..> QLKH: extend
 
+'Kho
+XEM_HANG <- NVBH
+
 'Sản phẩm
 XEM_SP <-- NVBH
 TIM_SP <-- NVBH
 
-'Kho
-XEM_HANG <- NVBH
-
 '----------- Khách Hàng -----------
 QLMH <- KH
-
-'Sản phẩm
-XEM_SP <-- KH
-TIM_SP <-- KH
 
 'Mua hàng
 THEO_DOI_HANG ..> QLMH: extend
 XEM_LSMH ..> QLMH: extend
+
+'Sản phẩm
+XEM_SP <-- KH
+TIM_SP <-- KH
 
 }
 
