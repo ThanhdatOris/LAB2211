@@ -1,0 +1,192 @@
+@startuml UC-SN
+
+skinparam shadowing false
+left to right direction
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  RoundCorner 15
+}
+
+actor "Khách Hàng" as KH
+actor "Nhân Viên Quản lý" as NVQL
+actor "Nhân Viên Bán Hàng" as NVBH
+
+rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
+
+  '>>>>>>>>>>>>>>> Khai báo >>>>>>>>>>>>>>>
+
+  package "Sản phẩm" {
+    (Quản lý sản phẩm) as QLSP
+    (Xem sản phẩm) as XEM_SP
+    (Thêm sản phẩm) as THEM_SP
+    (Sửa sản phẩm) as SUA_SP
+    (Tìm sản phẩm) as TIM_SP
+    (Xóa sản phẩm) as XOA_SP
+  }
+
+  package "Danh mục sản phẩm" {
+    (Quản lý danh mục) as QLDMSP
+    (Thêm danh mục) as THEM_DMSP
+    (Sửa danh mục) as SUA_DMSP
+    (Xóa danh mục) as XOA_DMSP
+    (Tìm danh mục) as TIM_DMSP
+  }
+
+  package "Kho hàng" {
+    (Quản lý kho hàng) as QLKHO
+    (Nhập hàng) as NHAP_HANG
+    (Xuất hàng) as XUAT_HANG
+    (Kiểm kê hàng) as KIEM_HANG
+    (Xem hàng tồn kho) as XEM_HANG
+  }
+
+  package "Nhân viên" {
+    (Quản lý nhân viên) as QLNV
+    (Thêm nhân viên) as THEM_NV
+    (Sửa nhân viên) as SUA_NV
+    (Xóa nhân viên) as XOA_NV
+    (Tìm nhân viên) as TIM_NV
+  }
+
+  package "Nhà cung cấp" {
+    (Quản lý nhà cung cấp) as QLNCC
+    (Thêm nhà cung cấp) as THEM_NCC
+    (Sửa nhà cung cấp) as SUA_NCC
+    (Xóa nhà cung cấp) as XOA_NCC
+    (Tìm nhà cung cấp) as TIM_NCC
+  }
+
+  package "Báo cáo" {
+    (Quản lý báo cáo) as QLBC
+    (Xem báo cáo) as XEM_BC
+    (Tạo báo cáo) as TAO_BC
+  }
+
+  package "Khách hàng" {
+    (Quản lý KH) as QLKH
+    (Thêm KH) as THEM_KH
+    (Sửa KH) as SUA_KH
+    (Tìm KH) as TIM_KH
+  }
+
+  package "Đơn hàng" {
+    (Quản lý đơn hàng) as QLDH
+    (Thêm đơn hàng) as THEM_DH
+    (Sửa đơn hàng) as SUA_DH
+    (Hủy đơn hàng) as HUY_DH
+    (Xem đơn) as XEM_DH
+    (Tìm đơn) as TIM_DH
+  }
+
+  package "Mua hàng" {
+    (Quản lý mua hàng) as QLMH
+    (Thêm hàng vào giỏ) as THEM_HANG_GH
+    (Đặt hàng) as DAT_HANG
+    (Theo dõi đơn hàng) as THEO_DOI_HANG
+    (Xem lịch sử mua hàng) as XEM_LSMH
+  }
+
+  package "Tài khoản cá nhân" {
+    (Quản lý tài khoản) as QLTK
+    (Đăng ký) as DANG_KY
+    (Đăng nhập) as DANG_NHAP
+    (Đăng xuất) as DANG_XUAT
+    (Xem tài khoản) as XEM_TK
+    (Sửa tài khoản) as SUA_TK
+  }
+
+  '>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>>
+
+  '----------- Nhân Viên Quản lý -----------
+  NVQL --> QLSP
+  NVQL --> QLDMSP
+  NVQL --> QLKHO
+  NVQL --> QLNV
+  NVQL --> QLNCC
+  NVQL --> QLBC
+
+  'Tài khoản
+  DANG_KY <.. DANG_NHAP : include
+  DANG_XUAT ..> DANG_NHAP : include
+  QLTK <.. XEM_TK : extend
+  QLTK <.. SUA_TK : extend
+
+  'Sản phẩm
+  QLSP <.. XEM_SP : extend
+  QLSP <.. THEM_SP : extend
+  QLSP <.. SUA_SP : extend
+  QLSP <.. TIM_SP : extend
+  QLSP <.. XOA_SP : extend
+
+  'Danh mục sản phẩm
+  QLDMSP <.. THEM_DMSP : extend
+  QLDMSP <.. SUA_DMSP : extend
+  QLDMSP <.. XOA_DMSP : extend
+  QLDMSP <.. TIM_DMSP : extend
+
+  'Kho hàng
+  QLKHO <.. NHAP_HANG : extend
+  QLKHO <.. XUAT_HANG : extend
+  QLKHO <.. KIEM_HANG : extend
+  QLKHO <.. XEM_HANG : extend
+
+  'Nhân viên
+  QLNV <.. THEM_NV : extend
+  QLNV <.. SUA_NV : extend
+  QLNV <.. XOA_NV : extend
+  QLNV <.. TIM_NV : extend
+
+  'Nhà cung cấp
+  QLNCC <.. THEM_NCC : extend
+  QLNCC <.. SUA_NCC : extend
+  QLNCC <.. XOA_NCC : extend
+  QLNCC <.. TIM_NCC : extend
+
+  'Báo cáo
+  QLBC <.. XEM_BC : extend
+  QLBC <.. TAO_BC : extend
+
+  'Khách hàng
+  NVQL --> TIM_KH
+  NVQL --> XEM_LSMH
+
+  '----------- Nhân Viên Bán Hàng -----------
+  NVBH --> QLDH
+  NVBH --> QLKH
+
+  'Đơn hàng
+  THEM_DH ..> QLDH : extend
+  SUA_DH ..> QLDH : extend
+  HUY_DH ..> QLDH : extend
+  XEM_DH ..> QLDH : extend
+  TIM_DH ..> QLDH : extend
+
+  'Khách hàng
+  THEM_KH ..> QLKH : extend
+  SUA_KH ..> QLKH : extend
+  TIM_KH ..> QLKH : extend
+  XEM_LSMH ..> QLKH : extend
+
+  'Sản phẩm
+  XEM_SP <-- NVBH
+  TIM_SP <-- NVBH
+
+  'Kho
+  XEM_HANG <-- NVBH
+
+  '----------- Khách Hàng -----------
+  QLMH <-- KH
+
+  'Sản phẩm
+  TIM_SP <--- KH
+  XEM_SP <--- KH
+
+  'Mua hàng
+  THEM_HANG_GH ..> QLMH : extend
+  DAT_HANG ..> QLMH : extend
+  THEO_DOI_HANG ..> QLMH : extend
+  XEM_LSMH ..> QLMH : extend
+}
+
+@enduml

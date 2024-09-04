@@ -10665,8 +10665,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   background-clip: padding-box;
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
   color: #333333;
   font-size: 13px;
   line-height: 1.42857143;
