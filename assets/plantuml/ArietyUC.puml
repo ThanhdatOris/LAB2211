@@ -1,0 +1,148 @@
+@startuml
+
+skinparam shadowing false
+left to right direction
+
+actor "Khách Hàng" as KH
+actor "Nhân Viên Quản lý" as NVQL
+actor "Nhân Viên Bán Hàng" as NVBH
+
+rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
+
+'>>>>>>>>>>>>>>> Khai báo >>>>>>>>>>>>>>>
+'Danh mục sp
+Usecase QLDMSP as "Quản lý danh mục"
+
+note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
+(Tìm danh mục) as TIM_DMSP
+(Xem danh mục) as XEM_DMSP
+
+'Kho hàng
+Usecase QLKHO as "Quản lí kho"
+note bottom of QLKHO : Nhập/Xuất/Kiểm kê kho
+(Xem hàng tồn kho) as XEM_HANG
+
+'Nhân viên
+Usecase QLNV as "Quản lý nhân viên"
+note bottom of QLNV: Thêm/Sửa/Xóa/Tìm nhân viên
+
+'Nhà cung cấp
+Usecase QLNCC as "Quản lý nhà cung cấp"
+note bottom of QLNCC: Thêm/Sửa/Xóa nhà cung cấp
+(Tìm nhà cung cấp) as TIM_NCC
+
+'Báo cáo
+(Quản lý báo cáo) as QLBC
+note bottom of QLBC: Xem/Tạo báo cáo
+
+
+'Khách hàng
+(Quản lý KH) as QLKH
+(Tìm KH) as TIM_KH
+note top of QLKH: Thêm/Sửa khách hàng
+
+'Đơn hàng
+Usecase QLDH as "Quản lý đơn hàng"
+note bottom of QLDH: Thêm/Sửa/Hủy đơn hàng
+
+(Tìm đơn) as TIM_DH
+(Xem đơn) as XEM_DH
+
+'Sản phẩm
+Usecase QLSP as "Quản lý sản phẩm"
+note bottom of QLSP: Thêm/Sửa/Xóa sản phẩm
+
+(Xem sản phẩm) as XEM_SP
+(Tìm sản phẩm) as TIM_SP
+XEM_SP .> TIM_SP: extend
+
+'Mua hàng
+Usecase QLMH as "Quản lý mua hàng"
+note bottom of QLMH: Giỏ hàng/Đặt hàng/Yêu cầu hủy đơn hàng
+
+(Theo dõi đơn hàng) as THEO_DOI_HANG
+(Xem lịch sử mua hàng) as XEM_LSMH
+
+'Đăng nhập, đăng xuất
+(Đăng nhập) as Login
+(Đăng xuất) as Logout
+(Đăng kí) as SignUp
+ Logout <.  Login: include
+
+'>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>
+'----------- Nhân Viên Quản lý -----------
+NVQL --> QLSP
+NVQL --> QLDMSP
+NVQL --> QLKHO
+NVQL --> QLNV
+NVQL --> QLNCC
+NVQL --> QLBC
+
+NVQL --> Login
+'Sản phẩm
+QLSP <.. XEM_SP: extend
+QLSP <.. TIM_SP: extend
+
+'Danh mục sp
+QLDMSP <.. TIM_DMSP: extend
+QLDMSP <.. XEM_DMSP: extend
+
+'Kho hàng
+QLKHO <.. XEM_HANG: extend
+
+'Nhân viên
+
+'Nhà cung cấp
+QLNCC <.. TIM_NCC: extend
+
+'Báo cáo
+
+'Khách hàng
+NVQL --> TIM_KH
+NVQL --> XEM_LSMH
+
+'Đơn hàng
+NVQL --> XEM_DH
+NVQL --> TIM_DH
+
+'----------- Nhân Viên Bán Hàng -----------
+QLDH <- NVBH
+QLKH <-- NVBH
+Login <-- NVBH
+
+'Danh mục
+TIM_DMSP <- NVBH
+XEM_DMSP <- NVBH
+
+'Đơn hàng
+TIM_DH ..> QLDH: extend
+XEM_DH ..> QLDH: extend
+
+'Khách hàng
+TIM_KH ..> QLKH: extend
+XEM_LSMH ..> QLKH: extend
+
+'Kho
+XEM_HANG <- NVBH
+
+'Sản phẩm
+TIM_SP <-- NVBH
+
+'----------- Khách Hàng -----------
+QLMH <-- KH
+
+'Tài khoản
+SignUp <- KH
+Login <- KH
+
+
+'Mua hàng
+THEO_DOI_HANG .> QLMH: extend
+XEM_LSMH ..> QLMH: extend
+
+'Sản phẩm
+TIM_SP <--- KH
+
+}
+
+@enduml
