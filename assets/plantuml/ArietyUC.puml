@@ -1,10 +1,10 @@
-@startuml
+@startuml NhuY_IS
 
 skinparam shadowing false
 left to right direction
 
 actor "Khách Hàng" as KH
-actor "Nhân Viên Quản lý" as NVQL
+actor "Nhân Viên Quản Lý" as NVQL
 actor "Nhân Viên Bán Hàng" as NVBH
 
 rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
@@ -18,7 +18,7 @@ note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
 (Xem danh mục) as XEM_DMSP
 
 'Kho hàng
-Usecase QLKHO as "Quản lí kho"
+Usecase QLKHO as "Quản lý kho"
 note bottom of QLKHO : Nhập/Xuất/Kiểm kê kho
 (Xem hàng tồn kho) as XEM_HANG
 
@@ -28,13 +28,12 @@ note bottom of QLNV: Thêm/Sửa/Xóa/Tìm nhân viên
 
 'Nhà cung cấp
 Usecase QLNCC as "Quản lý nhà cung cấp"
-note bottom of QLNCC: Thêm/Sửa/Xóa nhà cung cấp
-(Tìm nhà cung cấp) as TIM_NCC
+note bottom of QLNCC: Thêm/Sửa/Xóa/Xem/Tìm nhà cung cấp
+' (Tìm nhà cung cấp) as TIM_NCC
 
 'Báo cáo
 (Quản lý báo cáo) as QLBC
 note bottom of QLBC: Xem/Tạo báo cáo
-
 
 'Khách hàng
 (Quản lý KH) as QLKH
@@ -72,13 +71,15 @@ note bottom of QLMH: Giỏ hàng/Đặt hàng/Yêu cầu hủy đơn hàng
 '>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>
 '----------- Nhân Viên Quản lý -----------
 NVQL --> QLSP
-NVQL --> QLDMSP
+NVQL ----> QLDMSP
 NVQL --> QLKHO
 NVQL --> QLNV
 NVQL --> QLNCC
 NVQL --> QLBC
 
+'Tài khoản
 NVQL --> Login
+
 'Sản phẩm
 QLSP <.. XEM_SP: extend
 QLSP <.. TIM_SP: extend
@@ -93,7 +94,7 @@ QLKHO <.. XEM_HANG: extend
 'Nhân viên
 
 'Nhà cung cấp
-QLNCC <.. TIM_NCC: extend
+' QLNCC <.. TIM_NCC: extend
 
 'Báo cáo
 
@@ -108,6 +109,8 @@ NVQL --> TIM_DH
 '----------- Nhân Viên Bán Hàng -----------
 QLDH <- NVBH
 QLKH <-- NVBH
+
+'Tài khoản
 Login <-- NVBH
 
 'Danh mục
@@ -126,7 +129,7 @@ XEM_LSMH ..> QLKH: extend
 XEM_HANG <- NVBH
 
 'Sản phẩm
-TIM_SP <-- NVBH
+TIM_SP <---- NVBH
 
 '----------- Khách Hàng -----------
 QLMH <-- KH
@@ -135,13 +138,12 @@ QLMH <-- KH
 SignUp <- KH
 Login <- KH
 
-
 'Mua hàng
 THEO_DOI_HANG .> QLMH: extend
 XEM_LSMH ..> QLMH: extend
 
 'Sản phẩm
-TIM_SP <--- KH
+TIM_SP <-- KH
 
 }
 

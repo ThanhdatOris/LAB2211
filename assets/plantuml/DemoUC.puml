@@ -13,7 +13,6 @@ actor "Nhân Viên Quản lý" as NVQL
 actor "Nhân Viên Bán Hàng" as NVBH
 
 rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
-
   '>>>>>>>>>>>>>>> Khai báo >>>>>>>>>>>>>>>
 
   package "Sản phẩm" {
