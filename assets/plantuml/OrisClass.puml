@@ -121,14 +121,155 @@ class Order_Detail {
   +DeleteOrderDetail()
 }
 
-MyUser --> MyRole : N:1
-MyProduct --> Category : N:1
-MyProduct --> Supplier : N:1
-MyOrder --> MyUser : N:1
-Order_Detail --> MyOrder : N:1
-Order_Detail --> MyProduct : N:1
-Import --> Supplier : N:1
-Import_Detail --> Import : N:1
-Import_Detail --> MyProduct : N:1
-Gallery --> MyProduct : N:1
+' Relationships with labels on both ends
+MyUser --> MyRole : "N" --> "1" : belongs to / has roles
+MyProduct --> Category : "N" --> "1" : belongs to / contains products
+MyProduct --> Supplier : "N" --> "1" : supplied by / provides products
+MyOrder --> MyUser : "N" --> "1" : placed by / has orders
+Order_Detail --> MyOrder : "N" --> "1" : details of / has order details
+Order_Detail --> MyProduct : "N" --> "1" : includes / has product details
+Import --> Supplier : "N" --> "1" : imported from / provides imports
+Import_Detail --> Import : "N" --> "1" : includes / has import details
+Import_Detail --> MyProduct : "N" --> "1" : contains / included in import
+Gallery --> MyProduct : "N" --> "1" : images of / has gallery
 @enduml
+
+@startuml
+left to right direction
+class MyUser {
+  +ID : int
+  +MyRole_ID : int
+  +FullName : string
+  +Phone_Number : string
+  +Address : string
+  +Username : string
+  +Password : string
+  +Created_At : DateTime
+  +Updated_At : DateTime
+  +Deleted : bool
+  +Login()
+  +Logout()
+  +UpdateProfile()
+  +DeleteAccount()
+}
+
+class MyRole {
+  +ID : int
+  +Name : string
+  +AssignRole()
+  +RemoveRole()
+}
+
+class Supplier {
+  +ID : int
+  +Display_Name : string
+  +Address : string
+  +Phone : string
+  +AddSupplier()
+  +UpdateSupplier()
+  +DeleteSupplier()
+}
+
+class MyProduct {
+  +ID : int
+  +Category_ID : int
+  +Supplier_ID : int
+  +Title : string
+  +Unit : string
+  +Image : string
+  +Description : string
+  +Created_At : DateTime
+  +Updated_At : DateTime
+  +Status : string
+  +AddProduct()
+  +UpdateProduct()
+  +DeleteProduct()
+}
+
+class Category {
+  +ID : int
+  +Name : string
+  +AddCategory()
+  +UpdateCategory()
+  +DeleteCategory()
+}
+
+class Gallery {
+  +ID : int
+  +Image : string
+  +Product_ID : int
+  +AddImage()
+  +RemoveImage()
+}
+
+class Import {
+  +ID : int
+  +Supplier_ID : int
+  +Import_Date : DateTime
+  +Quantity : int
+  +Status : string
+  +CreateImport()
+  +UpdateImport()
+  +DeleteImport()
+}
+
+class Import_Detail {
+  +ID : int
+  +Import_ID : int
+  +MyProduct_ID : int
+  +Quantity : int
+  +Input_Price : decimal
+  +Output_Price : decimal
+  +Total_Price : decimal
+  +Status : string
+  +AddImportDetail()
+  +UpdateImportDetail()
+  +DeleteImportDetail()
+}
+
+class MyOrder {
+  +ID : int
+  +MyUser_ID : int
+  +FullName : string
+  +Phone_Number : string
+  +Address : string
+  +Order_Date : DateTime
+  +Order_Status : string
+  +Total_Price : decimal
+  +Payment_Method : string
+  +Payment_Status : string
+  +CreateOrder()
+  +UpdateOrder()
+  +CancelOrder()
+}
+
+class Order_Detail {
+  +ID : int
+  +MyOrder_ID : int
+  +MyProduct_ID : int
+  +Import_ID : int
+  +Price : decimal
+  +Quantity : int
+  +Date_Output : DateTime
+  +Total_Price : decimal
+  +Status : string
+  +AddOrderDetail()
+  +UpdateOrderDetail()
+  +DeleteOrderDetail()
+}
+
+MyUser "1" -- "n" MyOrder : has orders / placed by
+MyOrder "1" -- "n" Order_Detail : has order details / details of
+MyRole "1" -- "n" MyUser : has roles / belongs to
+Supplier "1" -- "n" MyProduct : provides products / supplied by
+Category "1" -- "n" MyProduct : contains products / belongs to
+Gallery "1" -- "n" MyProduct : has gallery / images of
+Supplier "1" -- "n" Import : provides imports / imported from
+Import "1" -- "n" Import_Detail : has import details / includes
+Import_Detail "n" -- "1" MyProduct : included in import / contains
+Order_Detail "n" -- "1" MyOrder : details of / belongs to
+Order_Detail "n" -- "1" MyProduct : product details / includes
+
+@enduml
+
+
