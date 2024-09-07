@@ -1,0 +1,134 @@
+@startuml
+class MyUser {
+  +int ID
+  +int MyRole_ID
+  +string FullName
+  +string Phone_Number
+  +string Address
+  +string Username
+  +string Password
+  +DateTime Created_At
+  +DateTime Updated_At
+  +bool Deleted
+  +Login()
+  +Logout()
+  +UpdateProfile()
+  +DeleteAccount()
+}
+
+class MyRole {
+  +int ID
+  +string Name
+  +AssignRole()
+  +RemoveRole()
+}
+
+class Supplier {
+  +int ID
+  +string Display_Name
+  +string Address
+  +string Phone
+  +AddSupplier()
+  +UpdateSupplier()
+  +DeleteSupplier()
+}
+
+class MyProduct {
+  +int ID
+  +int Category_ID
+  +int Supplier_ID
+  +string Title
+  +string Unit
+  +string Image
+  +string Description
+  +DateTime Created_At
+  +DateTime Updated_At
+  +string Status
+  +AddProduct()
+  +UpdateProduct()
+  +DeleteProduct()
+}
+
+class Category {
+  +int ID
+  +string Name
+  +AddCategory()
+  +UpdateCategory()
+  +DeleteCategory()
+}
+
+class Gallery {
+  +int ID
+  +string Image
+  +int Product_ID
+  +AddImage()
+  +RemoveImage()
+}
+
+class Import {
+  +int ID
+  +int Supplier_ID
+  +DateTime Import_Date
+  +int Quantity
+  +string Status
+  +CreateImport()
+  +UpdateImport()
+  +DeleteImport()
+}
+
+class Import_Detail {
+  +int ID
+  +int Import_ID
+  +int MyProduct_ID
+  +int Quantity
+  +decimal Input_Price
+  +decimal Output_Price
+  +decimal Total_Price
+  +string Status
+  +AddImportDetail()
+  +UpdateImportDetail()
+  +DeleteImportDetail()
+}
+
+class MyOrder {
+  +int ID
+  +int MyUser_ID
+  +string FullName
+  +string Phone_Number
+  +string Address
+  +DateTime Order_Date
+  +string Order_Status
+  +decimal Total_Price
+  +string Payment_Method
+  +string Payment_Status
+  +CreateOrder()
+  +UpdateOrder()
+  +CancelOrder()
+}
+
+class Order_Detail {
+  +int ID
+  +int MyOrder_ID
+  +int MyProduct_ID
+  +int Import_ID
+  +decimal Price
+  +int Quantity
+  +DateTime Date_Output
+  +decimal Total_Price
+  +string Status
+  +AddOrderDetail()
+  +UpdateOrderDetail()
+  +DeleteOrderDetail()
+}
+
+MyUser --> MyRole : N:1
+MyProduct --> Category : N:1
+MyProduct --> Supplier : N:1
+MyOrder --> MyUser : N:1
+Order_Detail --> MyOrder : N:1
+Order_Detail --> MyProduct : N:1
+Import --> Supplier : N:1
+Import_Detail --> Import : N:1
+Import_Detail --> MyProduct : N:1
+Gallery --> MyProduct : N:1
+@enduml
