@@ -69,7 +69,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 (Quản lý mua hàng) as QLMH
 (Thêm hàng vào giỏ) as THEM_HANG_GH
 (Đặt hàng) as  DAT_HANG
-(Theo dõi đơn hàng) as THEO_DOI_HANG 
+(Theo dõi đơn hàng) as THEO_DOI_HANG
 (Xem lịch sử mua hàng) as XEM_LSMH
 
 '>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>>
