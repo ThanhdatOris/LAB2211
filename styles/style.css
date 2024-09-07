@@ -4,201 +4,235 @@
 html {}
 
 body {
-    position: relative;
-    background: url("/assets/image/boss.avif") no-repeat fixed center;
-    font-family: 'Rocher';
-    text-align: center;
-    font-size: 50px;
-    height: 100vh;
-    /* display: flex; */
-    /* flex-direction: column; */
-    gap: 20%;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
+  position: relative;
+  background: url("/assets/image/boss.avif") no-repeat fixed center;
+  font-family: 'Rocher';
+  text-align: center;
+  font-size: 50px;
+  height: 100vh;
+  /* display: flex; */
+  /* flex-direction: column; */
+  gap: 20%;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 /*Overlay Layer*/
 .layer {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
-
+.container_content {
+  /* padding-top: 200px; */
+  display: grid;
+  grid-template-columns: 400px 400px 400px;  
+  gap: 30px;
+  justify-content: center;
+  align-items: start;
+}
 /*Heading Style*/
 h1 {
-    color: rgb(147, 53, 229);
-    text-align: center;
-    font-size: 2em;
-    margin-top: 20vh;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin: 0;
+  color: rgb(147, 53, 229);
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20vh;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
 
 /*Special Heading*/
 .say-hello {
-    font-family: 'Calligraffitti', cursive;
-    font-weight: 700px;
-    font-size: 5rem;
-    position: relative;
-    text-shadow: -15px 5px 20px #ced0d3;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 0.02em;
-    text-align: center;
-    color: #F9f1cc;
-    text-shadow:
-        5px 5px 0px #FFB650,
-        10px 10px 0px #FFD662,
-        15px 15px 0px #FF80BF,
-        20px 20px 0px #EF5097,
-        25px 25px 0px #6868AC,
-        30px 30px 0px #90B1E0;
+  font-family: 'Calligraffitti', cursive;
+  font-weight: 700px;
+  font-size: 5rem;
+  position: absolute;
+  white-space: nowrap;
+  text-shadow: -15px 5px 20px #ced0d3;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #F9f1cc;
+  text-shadow:
+    5px 5px 0px #FFB650,
+    10px 10px 0px #FFD662,
+    15px 15px 0px #FF80BF,
+    20px 20px 0px #EF5097,
+    25px 25px 0px #6868AC,
+    30px 30px 0px #90B1E0;
 }
 
 /*Section Style*/
 #main {
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 #oris,
 #sinoo,
 #ariety {
-    position: relative;
-    top: 15%;
+  position: relative;
+  top: 15%;
 
-    .container {
-        margin: 100px auto;
-        max-width: 600px;
-        padding: 20px;
-        background-color: rgba(255,255,255,0.9);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
-    }
+  .container {
+    margin: 100px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+  }
 
-    z-index: 9;
+  z-index: 9;
 }
 
 /*Embed*/
 .youtube-embed iframe {
-    width: 100%;
-    height: 300px;
-    border-radius: 10px;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
 }
 
 .tiktok-embed {
-    border-radius: 10px;
-    margin: 0 0 0 0;
+  border-radius: 10px;
+  margin: 0 0 0 0;
 }
 
-.facebook-embed iframe{
-    border-radius: 10px;
-    width: 100%;
-    min-height: 300px;
-    max-height: max-content;
-    border: 5px;
+.facebook-embed iframe {
+  border-radius: 10px;
+  width: 100%;
+  min-height: 300px;
+  max-height: max-content;
+  border: 5px;
 }
 
 /*Font Import*/
 @font-face {
-    font-family: 'Rocher';
-    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
 }
 
 /*Font Palette*/
 @font-palette-values --Grays {
-    font-family: Rocher;
-    base-palette: 9;
+  font-family: Rocher;
+  base-palette: 9;
 }
 
 @font-palette-values --Purples {
-    font-family: Rocher;
-    base-palette: 6;
+  font-family: Rocher;
+  base-palette: 6;
 }
 
 @font-palette-values --Mint {
-    font-family: Rocher;
-    base-palette: 7;
+  font-family: Rocher;
+  base-palette: 7;
 }
 
 .grays {
-    font-palette: --Grays;
+  font-palette: --Grays;
 }
 
 .purples {
-    font-palette: --Purples;
+  font-palette: --Purples;
 }
 
 .mint {
-    font-palette: --Mint;
+  font-palette: --Mint;
 }
 
 /* Responsive Styles for Tablets */
+@media (max-width: 1100px) {
+  .container_content {
+    padding-top: 150px;
+    display: grid;
+    grid-template-columns: auto;  
+    grid-template-rows: 200px;
+    /* gap: 50px; */
+    justify-content: center;
+    /* align-items: start; */
+  }
+}
 @media (max-width: 768px) {
-    body {
-      font-size: 40px; /* Reduce base font size for tablets */
-    }
+  body {
+    font-size: 40px;
+    /* Reduce base font size for tablets */
+  }
 
-    .say-hello {
-      font-size: 4rem; /* Adjust font size of main heading */
-    }
+  .say-hello {
+    font-size: 4rem;
+    /* Adjust font size of main heading */
+  }
 
-    .youtube-embed iframe,
-    .tiktok-embed blockquote {
-      height: 200px; /* Reduce video/embed height for smaller screens */
-    }
-    
-    .container {
-      padding: 20px; /* Add padding for better spacing on smaller screens */
-    }
+  .youtube-embed iframe,
+  .tiktok-embed blockquote {
+    height: 200px;
+    /* Reduce video/embed height for smaller screens */
+  }
+
+  .container {
+    padding: 20px;
+    /* Add padding for better spacing on smaller screens */
+  }
 }
 
 /* Responsive Styles for Mobile */
 @media (max-width: 480px) {
-    body {
-      font-size: 30px; /* Further reduce font size for mobile */
-    }
+  body {
+    font-size: 30px;
+    /* Further reduce font size for mobile */
+  }
 
-    .say-hello {
-      font-size: 3rem; /* Adjust main heading for mobile */
-    }
+  .say-hello {
+    font-size: 3rem;
+    /* Adjust main heading for mobile */
+  }
 
-    .youtube-embed iframe {
-      height: 150px; /* Further reduce video/embed height */
-    }
+  .youtube-embed iframe {
+    height: 150px;
+    /* Further reduce video/embed height */
+  }
 
-    .tiktok-embed blockquote {
-        height: 250px; /* Further reduce video/embed height */
-    }
+  .tiktok-embed blockquote {
+    height: 250px;
+    /* Further reduce video/embed height */
+  }
 
-    h1 {
-      font-size: 1.5em; /* Scale down section headings */
-    }
+  h1 {
+    font-size: 1.5em;
+    /* Scale down section headings */
+  }
 
-    h3 {
-        font-size: 1em; /* Scale down section headings */
-    }
+  h3 {
+    font-size: 1em;
+    /* Scale down section headings */
+  }
 
-    .container {
-      padding: 15px; /* Increase padding for mobile */
-      margin: 10px 0; /* Reduce margins */
-    }
-    
-    #main .container {
-      justify-content: flex-start; /* Align content at the top */
-      height: auto; /* Auto height for better content flow */
-    }
+  .container {
+    padding: 15px;
+    /* Increase padding for mobile */
+    margin: 10px 0;
+    /* Reduce margins */
+  }
 
-    .layer {
-      background-color: rgba(0, 0, 0, 0.7); /* Darken overlay for mobile */
-    }
+  #main .container {
+    justify-content: flex-start;
+    /* Align content at the top */
+    height: auto;
+    /* Auto height for better content flow */
+  }
+
+  .layer {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darken overlay for mobile */
+  }
 }
