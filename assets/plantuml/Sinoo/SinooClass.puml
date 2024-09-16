@@ -1,0 +1,167 @@
+@startuml ClassSN
+
+left to right direction
+
+' --------------- ACTOR ---------------
+
+' class People {
+'     + full_name: string
+'     + phone_number: string
+'     + address: string
+'     + gender: string
+'     + birthday: string
+' }
+
+class Managerment {
+    + ID: string
+    + full_name: string
+    + phone_number: string
+    + address: string
+    + gender: string
+    + birthday: string
+    'Method
+    + Get(): void
+}
+
+class SaleStaff {
+    + ID: string
+    + role_id: int
+    + full_name: string
+    + phone_number: string
+    + address: string
+    + gender: string
+    + birthday: string
+    + citizen_id: string
+    
+    'Method
+    + Get(): void
+}
+
+class Customer {
+    + ID: string
+    + full_name: string
+    + phone_number: string
+    + address: string
+    + gender: string
+    + birthday: string
+    'Method
+    + Get(): void
+}
+
+' --------------- UC ---------------
+class Product {
+    + ID: string
+    + name: string
+    + price: double
+    + description: string
+    + image: list<string>
+    + acitive: bool
+    'Method
+    + Get(): void
+}
+
+class Supplier {
+    + ID: string
+    + display_name: string
+    + address: string
+    + email: string
+    + phone_number: string
+    + image: string
+    + acitive: bool
+    'Method
+    + Get(): void
+}
+
+'--- Export ---
+class Cart {
+    + ID: string
+    + totalPrice: double
+    'Method
+    + AddItem(): void
+    + RemoveItem(): void
+    + CalculateTotal(): void
+    + ClearCart(): void
+}
+
+class CartItem {
+    + ID: string
+    + quantity: int
+    + price: double
+}
+class Order {
+    + ID: string
+    + total_price: double
+    + order_date: date
+    + order_status: int
+    'Method
+    + PlaceOrder(): void
+    + CancelOrder(): void
+    + UpdateStatus(): void
+}
+
+class OrderItem {
+    + ID: string
+    + quantity: int
+    + price: double
+    
+    'Method
+    + Get(): void
+}
+
+'--- Export ---
+
+class GoodReceived {
+    + ID: string
+    + receipt_date: date
+    + total_price: double
+    + note: string
+    'Method
+    + Get(): void
+}
+class GoodReceivedItem {
+    + ID: string
+    + quantity: int
+    + import_price: double
+    + total_price: double
+}
+
+' class Gallary {
+'     + ID: string
+'     + image: string
+'     + description: string
+'     + acitive: bool
+' }
+
+class Category {
+    + ID: string
+    + parent_id: int
+    + name: string
+    + description: string
+    + acitive: int
+    'Method
+    + Get(): void
+}
+
+'-------------------------Connection-------------------------
+
+
+Product "0..*" -up-- "1" Category
+Product "0..*" -down- "1..*" Cart
+(Cart, Product) . CartItem
+Product "0..*" -up-- "1..*" Order
+(Product, Order) .. OrderItem
+Product "1..*" -left- "1..*" GoodReceived
+(GoodReceived, Product) . GoodReceivedItem
+
+GoodReceived "1" -right-- "1" Supplier
+GoodReceived "1" -up-- "1" Managerment
+
+Cart "1" -down-- "1" Customer
+
+Order "0..*" -left-- "1" Customer
+Order "1" -right-- "1" SaleStaff
+
+Category "1..*" -right-- "1" Managerment
+
+
+@enduml

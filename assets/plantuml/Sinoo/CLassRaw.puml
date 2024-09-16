@@ -1,0 +1,158 @@
+@startuml ClassSN
+
+left to right direction
+
+' --------------- ACTOR ---------------
+
+class People {
+    + full_name: string
+    + phone_number: string
+    + address: string
+    + gender: string
+    + birthday: string
+}
+
+class Managerment {
+    + ID: string
+    'Method
+    + Get(): void
+}
+
+class SaleStaff {
+    + ID: string
+    + role_id: int
+    + citizen_id: string
+    
+    'Method
+    + Get(): void
+}
+
+class Customer {
+    + ID: string
+    'Method
+    + Get(): void
+}
+
+' --------------- UC ---------------
+class Product {
+    + ID: string
+    + name: string
+    + price: double
+    + description: string
+    + image: string
+    + acitive: bool
+    'Method
+    + Get(): void
+}
+
+class Supplier {
+    + ID: string
+    + display_name: string
+    + address: string
+    + email: string
+    + phone_number: string
+    + image: string
+    + acitive: bool
+    'Method
+    + Get(): void
+}
+
+'--- Export ---
+class Cart {
+    + ID: string
+    + totalPrice: double
+    'Method
+    + AddItem(): void
+    + RemoveItem(): void
+    + CalculateTotal(): void
+    + ClearCart(): void
+}
+
+class CartItem {
+    + ID: string
+    + quantity: int
+    + price: double
+}
+class Order {
+    + ID: string
+    + total_price: double
+    + order_date: date
+    + order_status: int
+    'Method
+    + PlaceOrder(): void
+    + CancelOrder(): void
+    + UpdateStatus(): void
+}
+
+class OrderItem {
+    + ID: string
+    + quantity: int
+    + price: double
+    
+    'Method
+    + Get(): void
+}
+
+'--- Export ---
+
+class InventoryReceipt {
+    + ID: string
+    + receipt_date: date
+    + total_price: double
+    + note: string
+    'Method
+    + Get(): void
+}
+class InventoryReceiptItem {
+    + ID: string
+    + quantity: int
+    + import_price: double
+    + total_price: double
+}
+
+class Gallary {
+    + ID: string
+    + image: string
+    + description: string
+    + acitive: bool
+}
+
+class Category {
+    + ID: string
+    + parent_id: int
+    + name: string
+    + description: string
+    + acitive: int
+    'Method
+    + Get(): void
+}
+
+'-------------------------Connection-------------------------
+People <|.. SaleStaff
+People <|.. Customer
+
+SaleStaff <|..  Managerment
+
+Managerment "1" -- "1..*" Category
+Customer "1" -- "0..*" Order
+
+Product "1" -- "1..*" Gallary
+
+Cart "1" -- "1" Customer
+Cart "1..*" -- "0..*" Product
+(Cart, Product) .. CartItem
+
+Order "1" ---- "1" SaleStaff
+Order "1..*" -- "0..*" Product
+(Order, Product) .. OrderItem
+
+InventoryReceipt "1" -- "1" Supplier
+InventoryReceipt "1" -- "1" Managerment
+InventoryReceipt "1..*" -- "1..*" Product
+(InventoryReceipt, Product) .. InventoryReceiptItem
+
+
+
+Product "0..*" -- "1" Category
+
+@enduml
