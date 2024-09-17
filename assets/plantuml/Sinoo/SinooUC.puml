@@ -19,7 +19,7 @@ note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
 
 'Kho hàng
 Usecase QLKHO as "Quản lý phiếu nhập/xuất kho"
-note bottom of QLKHO : Xem, tìm kiếm, tạo, cập nhật,  \nhủy phiếu nhập kho và phiếu xuất kho,  \nxem và cập nhật số lượng tồn kho 
+note bottom of QLKHO : Xem, tìm kiếm, tạo, cập nhật,  \nhủy phiếu nhập kho,  \ncập nhật số lượng tồn kho 
 (Xem số lượng tồn kho) as XEM_HANG
 (Xem phiếu xuất kho) as XEM_PXK
 (Tìm phiếu xuất kho) as TIM_PXK
@@ -137,7 +137,7 @@ TIM_PXK <--- NVBH
 TIM_SP <-- NVBH
 
 '----------- Khách Hàng -----------
-QLGH <--- KH
+QLGH <-- KH
 
 'Tài khoản
 SignUp <- KH
