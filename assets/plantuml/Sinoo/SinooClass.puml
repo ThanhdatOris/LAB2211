@@ -20,7 +20,7 @@ class Managerment {
     + gender: string
     + birthday: string
     'Method
-    + Get(): void
+
 }
 
 class SaleStaff {
@@ -34,18 +34,17 @@ class SaleStaff {
     + citizen_id: string
     
     'Method
-    + Get(): void
 }
 
 class Customer {
     + ID: string
-    + full_name: string
     + phone_number: string
+    + password: string
+    + full_name: string
     + address: string
     + gender: string
     + birthday: string
     'Method
-    + Get(): void
 }
 
 ' --------------- UC ---------------
@@ -53,11 +52,14 @@ class Product {
     + ID: string
     + name: string
     + price: double
+    + unit: string
     + description: string
     + image: list<string>
     + acitive: bool
     'Method
-    + Get(): void
+    + AddNewProduct(): void
+    + EditProduct(): void
+    + DeleteProduct(): void
 }
 
 class Supplier {
@@ -69,7 +71,9 @@ class Supplier {
     + image: string
     + acitive: bool
     'Method
-    + Get(): void
+    + AddNewSupplier(): void
+    + EditSupplier(): void
+    + DeleteSupplier(): void
 }
 
 '--- Export ---
@@ -88,11 +92,14 @@ class CartItem {
     + quantity: int
     + price: double
 }
+
 class Order {
     + ID: string
+    + customer_phone_number: string
     + total_price: double
     + order_date: date
     + order_status: int
+
     'Method
     + PlaceOrder(): void
     + CancelOrder(): void
@@ -103,22 +110,20 @@ class OrderItem {
     + ID: string
     + quantity: int
     + price: double
-    
     'Method
-    + Get(): void
 }
 
 '--- Export ---
 
-class GoodReceived {
+class GoodsReceived {
     + ID: string
     + receipt_date: date
     + total_price: double
     + note: string
     'Method
-    + Get(): void
 }
-class GoodReceivedItem {
+
+class GoodsReceivedItem {
     + ID: string
     + quantity: int
     + import_price: double
@@ -139,7 +144,9 @@ class Category {
     + description: string
     + acitive: int
     'Method
-    + Get(): void
+    + AddNewCategory(): void
+    + EditCategory(): void
+    + DeleteCategory(): void
 }
 
 '-------------------------Connection-------------------------
@@ -148,13 +155,13 @@ class Category {
 Product "0..*" -up-- "1" Category
 Product "0..*" -down- "1..*" Cart
 (Cart, Product) . CartItem
-Product "0..*" -up-- "1..*" Order
+Product "0..*" -down-- "1..*" Order
 (Product, Order) .. OrderItem
-Product "1..*" -left- "1..*" GoodReceived
-(GoodReceived, Product) . GoodReceivedItem
+Product "1..*" -left-- "1..*" GoodsReceived
+(GoodsReceived, Product) . GoodsReceivedItem
 
-GoodReceived "1" -right-- "1" Supplier
-GoodReceived "1" -up-- "1" Managerment
+GoodsReceived "1" -right-- "1" Supplier
+GoodsReceived "1" -up-- "1" Managerment
 
 Cart "1" -down-- "1" Customer
 
