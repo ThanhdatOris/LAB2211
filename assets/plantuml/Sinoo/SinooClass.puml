@@ -10,12 +10,11 @@ class User {
     + phone_number: string
     + address: string
     + gender: string
-    + dayOfYear: string
+    + dateOfBirth: string
     + password: string
     'Method
     + ChangePassword(): void
     + ForgotPassword(): void
-
 }
 
 class Managerment {
@@ -27,12 +26,16 @@ class Managerment {
 
 class SaleStaff {
     + citizen_id: string
+    + dateOfIssue: date
+    + placeOfIssue: date
     'Method
+    + PlaceOrderForCustomer(): void
 }
 
 class Customer {
     'Method
     + ChangeInfo(): void
+    + ViewOrderHistory(): void
 }
 
 ' --------------- UC ---------------
@@ -41,6 +44,13 @@ class Product {
     + name: string
     + price: double
     + unit: string
+    + material: string
+    + dimensions: string
+    + standard: string
+    + color: string
+    + style: string
+    + brand: string
+    + warranty_period : string
     + description: string
     + image: list<string>
     + acitive: bool
@@ -79,10 +89,19 @@ class Order {
 
 class OrderItem {
     + ID: string
-    + quantity: int
     + price: double
+    + quantity: int
     'Method
 }
+
+class Invoice {
+    + ID: string
+    + Invoice_Date: date
+    + total_price: double
+    + Payment_Status: string
+    + Payment_Method: string
+}
+
 
 '--- Import ---
 class Supplier {
@@ -116,15 +135,22 @@ class Category {
     + ID: string
     + parent_id: int
     + name: string
+    + room_type: string 
+    + usage_type : string
     + description: string
     + acitive: int
 }
 
-' class Gallary {
+' class Image {
 '     + ID: string
-'     + image: string
+'     + image_url: string
+'     + image_type: string
 '     + description: string
-'     + acitive: bool
+' }
+
+' class ProductImage {
+'     + ID: string
+'     + purpose : string
 ' }
 
 '-------------------------Connection-------------------------
@@ -139,12 +165,14 @@ Product "1..*" -left-- "1..*" GoodsReceived
 (GoodsReceived, Product) . GoodsReceivedItem
 
 GoodsReceived "1..n" -up-- "1" Supplier
-GoodsReceived "1" -up-- "1" Managerment
+GoodsReceived "0..*" -up-- "1" Managerment: Manage
 
 Cart "1" -down-- "1" Customer
+Cart "1" -right-> "1" Order : Checkout
 
-Order "0..*" -left-- "1" Customer
-Order "1" -right-- "1" SaleStaff
+Order "0..*" -left-- "1" Customer: has 
+Order "0..*" -right-- "1" SaleStaff: creates orders for
+Order "1" -up-- "0..1" Invoice: has
 
 Category "1..*" -right-- "1" Managerment
 
