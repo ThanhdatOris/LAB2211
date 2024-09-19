@@ -1,11 +1,10 @@
-@startuml ClassSN
+@startuml classdemo
 
 left to right direction
 
-' --------------- ACTOR ---------------
 
 class User {
-    + ID: string
+    + id: string
     + full_name: string
     + phone_number: string
     + address: string
@@ -38,9 +37,9 @@ class Customer {
     + ViewOrderHistory(): void
 }
 
-' --------------- UC ---------------
+
 class Product {
-    + ID: string
+    + id: string
     + name: string
     + price: double
     + unit: string
@@ -50,16 +49,15 @@ class Product {
     + color: string
     + style: string
     + brand: string
-    + warranty_period : string
+    + warrantyPeriod : string
     + description: string
     + image: list<string>
     + acitive: bool
     'Method
 }
 
-'--- Export ---
 class Cart {
-    + ID: string
+    + id: string
     + totalPrice: double
     'Method
     + AddItem(): void
@@ -69,17 +67,17 @@ class Cart {
 }
 
 class CartItem {
-    + ID: string
+    + id: string
     + quantity: int
     + price: double
 }
 
 class Order {
-    + ID: string
-    + customer_phone_number: string
-    + total_price: double
-    + order_date: date
-    + order_status: int
+    + id: string
+    + customerPhoneNumber: string
+    + totalPrice: double
+    + orderDate: date
+    + orderStatus: int
 
     'Method
     + PlaceOrder(): void
@@ -88,28 +86,27 @@ class Order {
 }
 
 class OrderItem {
-    + ID: string
+    + id: string
     + price: double
     + quantity: int
     'Method
 }
 
 class Invoice {
-    + ID: string
-    + Invoice_Date: date
-    + total_price: double
-    + Payment_Status: string
-    + Payment_Method: string
+    + id: string
+    + invoiceDate: date
+    + totalPrice: double
+    + PaymentStatus: string
+    + PaymentMethod: string
 }
 
 
-'--- Import ---
 class Supplier {
-    + ID: string
+    + id: string
     + display_name: string
     + address: string
     + email: string
-    + phone_number: string
+    + phoneNumber: string
     + image: string
     + acitive: bool
     'Method
@@ -117,43 +114,30 @@ class Supplier {
 }
 
 class GoodsReceived {
-    + ID: string
-    + receipt_date: date
-    + total_price: double
+    + id: string
+    + receiptDate: date
+    + totalPrice: double
     + note: string
     'Method
 }
 
 class GoodsReceivedItem {
-    + ID: string
+    + id: string
     + quantity: int
-    + import_price: double
-    + total_price: double
+    + importPrice: double
+    + totalPrice: double
 }
 
 class Category {
-    + ID: string
-    + parent_id: int
+    + id: string
+    + parentID: int
     + name: string
-    + room_type: string 
-    + usage_type : string
+    + roomType: string
+    + usageType : string
     + description: string
-    + acitive: int
+    + acitive: bool
 }
 
-' class Image {
-'     + ID: string
-'     + image_url: string
-'     + image_type: string
-'     + description: string
-' }
-
-' class ProductImage {
-'     + ID: string
-'     + purpose : string
-' }
-
-'-------------------------Connection-------------------------
 
 
 Product "0..*" -up-- "1" Category
@@ -170,7 +154,7 @@ GoodsReceived "0..*" -up-- "1" Managerment: Manage
 Cart "1" -down-- "1" Customer
 Cart "1" -right-> "1" Order : Checkout
 
-Order "0..*" -left-- "1" Customer: has 
+Order "0..*" -left-- "1" Customer: has
 Order "0..*" -right-- "1" SaleStaff: creates orders for
 Order "1" -up-- "0..1" Invoice: has
 
