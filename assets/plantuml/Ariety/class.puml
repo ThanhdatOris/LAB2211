@@ -1,0 +1,167 @@
+@startuml classdemo
+
+left to right direction
+
+
+class User {
+    + id: string
+    + full_name: string
+    + phone_number: string
+    + address: string
+    + gender: string
+    + dateOfBirth: string
+    + password: string
+    'Method
+    + ChangePassword(): void
+    + ForgotPassword(): void
+}
+
+class Managerment {
+    + citizen_id: string
+    'Method
+    + ChangeInfo(): void
+    
+}
+
+class SaleStaff {
+    + citizen_id: string
+    + dateOfIssue: date
+    + placeOfIssue: string
+    'Method
+    + PlaceOrderForCustomer(): void
+}
+
+class Customer {
+    'Method
+    + ChangeInfo(): void
+    + ViewOrderHistory(): void
+}
+
+
+class Product {
+    + id: string
+    + name: string
+    + price: double
+    + unit: string
+    + material: string
+    + dimensions: string
+    + standard: string
+    + color: string
+    + style: string
+    + brand: string
+    + warrantyPeriod : string
+    + description: string
+    + image: list<string>
+    + acitive: bool
+    'Method
+}
+
+class Cart {
+    + id: string
+    + totalPrice: double
+    'Method
+    + AddItem(): void
+    + RemoveItem(): void
+    + CalculateTotal(): void
+    + ClearCart(): void
+}
+
+class CartItem {
+    + id: string
+    + quantity: int
+    + price: double
+}
+
+class Order {
+    + id: string
+    + customerPhoneNumber: string
+    + totalPrice: double
+    + orderDate: date
+    + orderStatus: int
+
+    'Method
+    + PlaceOrder(): void
+    + CancelOrder(): void
+    + UpdateStatus(): void
+}
+
+class OrderItem {
+    + id: string
+    + price: double
+    + quantity: int
+    'Method
+}
+
+class Invoice {
+    + id: string
+    + invoiceDate: date
+    + totalPrice: double
+    + PaymentStatus: string
+    + PaymentMethod: string
+}
+
+
+class Supplier {
+    + id: string
+    + display_name: string
+    + address: string
+    + email: string
+    + phoneNumber: string
+    + image: string
+    + acitive: bool
+    'Method
+
+}
+
+class GoodsReceived {
+    + id: string
+    + receiptDate: date
+    + totalPrice: double
+    + note: string
+    'Method
+}
+
+class GoodsReceivedItem {
+    + id: string
+    + quantity: int
+    + importPrice: double
+    + totalPrice: double
+}
+
+class Category {
+    + id: string
+    + parentID: int
+    + name: string
+    + roomType: string
+    + usageType : string
+    + description: string
+    + acitive: bool
+}
+
+
+
+Product "0..*" -up-- "1" Category
+Product "0..*" -down- "1..*" Cart
+(Cart, Product) . CartItem
+Product "0..*" -down-- "1..*" Order
+(Product, Order) .. OrderItem
+Product "1..*" -left-- "1..*" GoodsReceived
+(GoodsReceived, Product) . GoodsReceivedItem
+
+GoodsReceived "1..n" -up-- "1" Supplier
+GoodsReceived "0..*" -up-- "1" Managerment: Manage
+
+Cart "1" -down-- "1" Customer
+Cart "1" -right-> "1" Order : Checkout
+
+Order "0..*" -left-- "1" Customer: has
+Order "0..*" -right-- "1" SaleStaff: creates orders for
+Order "1" -up-- "0..1" Invoice: has
+
+Category "1..*" -right-- "1" Managerment
+
+Customer --|> User
+SaleStaff --|> User
+Managerment --|> User
+
+@enduml
