@@ -1,4 +1,4 @@
-@startuml
+@startuml OrisClass
 class MyUser {
   +int ID
   +int MyRole_ID
@@ -134,7 +134,7 @@ Import_Detail --> MyProduct : "N" --> "1" : contains / included in import
 Gallery --> MyProduct : "N" --> "1" : images of / has gallery
 @enduml
 
-@startuml
+@startuml OrisClass_pre
 left to right direction
 class MyUser {
   +ID : int

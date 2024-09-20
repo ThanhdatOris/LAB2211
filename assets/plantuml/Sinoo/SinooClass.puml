@@ -6,18 +6,21 @@ left to right direction
 
 class User {
     + ID: string
-    + full_name: string
+    + fullname: string
     + phone_number: string
     + address: string
     + gender: string
     + dateOfBirth: string
     + password: string
+
     'Method
     + ChangePassword(): void
     + ForgotPassword(): void
+    + UpdateProfile(): void
+
 }
 
-class Managerment {
+class Manager {
     + citizen_id: string
     'Method
     + ChangeInfo(): void
@@ -27,7 +30,7 @@ class Managerment {
 class SaleStaff {
     + citizen_id: string
     + dateOfIssue: date
-    + placeOfIssue: date
+    + placeOfIssue: string
     'Method
     + PlaceOrderForCustomer(): void
 }
@@ -45,7 +48,7 @@ class Product {
     + price: double
     + unit: string
     + material: string
-    + dimensions: string
+    + dimension: string
     + standard: string
     + color: string
     + style: string
@@ -53,7 +56,7 @@ class Product {
     + warranty_period : string
     + description: string
     + image: list<string>
-    + acitive: bool
+    + active: bool
     'Method
 }
 
@@ -66,7 +69,7 @@ class Cart {
     + RemoveItem(): void
     + CalculateTotal(): void
     + ClearCart(): void
-}
+}   
 
 class CartItem {
     + ID: string
@@ -80,7 +83,6 @@ class Order {
     + total_price: double
     + order_date: date
     + order_status: int
-
     'Method
     + PlaceOrder(): void
     + CancelOrder(): void
@@ -111,9 +113,8 @@ class Supplier {
     + email: string
     + phone_number: string
     + image: string
-    + acitive: bool
+    + active: bool
     'Method
-
 }
 
 class GoodsReceived {
@@ -138,7 +139,7 @@ class Category {
     + room_type: string 
     + usage_type : string
     + description: string
-    + acitive: int
+    + active: bool
 }
 
 ' class Image {
@@ -165,19 +166,19 @@ Product "1..*" -left-- "1..*" GoodsReceived
 (GoodsReceived, Product) . GoodsReceivedItem
 
 GoodsReceived "1..n" -up-- "1" Supplier
-GoodsReceived "0..*" -up-- "1" Managerment: Manage
+GoodsReceived "0..*" -up-- "1" Manager: Manage
 
 Cart "1" -down-- "1" Customer
-Cart "1" -right-> "1" Order : Checkout
+Cart "1" -right- "1" Order : Checkout
 
 Order "0..*" -left-- "1" Customer: has 
 Order "0..*" -right-- "1" SaleStaff: creates orders for
 Order "1" -up-- "0..1" Invoice: has
 
-Category "1..*" -right-- "1" Managerment
+Category "1..*" -right-- "1" Manager
 
 Customer --|> User
 SaleStaff --|> User
-Managerment --|> User
+Manager --|> User
 
 @enduml
