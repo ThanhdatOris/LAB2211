@@ -18,7 +18,7 @@ note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
  TIM_DMSP <.. XEM_DMSP: extend
 
 'Kho hàng
-Usecase QLKHO as "Quản lý phiếu nhập/xuất kho"
+Usecase QLKHO as "Quản lý phiếu nhập kho"
 note bottom of QLKHO : Xem, tìm kiếm, tạo, cập nhật,  \nhủy phiếu nhập kho,  \ncập nhật số lượng tồn kho 
 (Xem số lượng tồn kho) as XEM_HANG
 (Xem phiếu xuất kho) as XEM_PXK
@@ -35,8 +35,8 @@ note bottom of QLNCC: Thêm/Sửa/Xóa/Xem/Tìm nhà cung cấp
 ' (Tìm nhà cung cấp) as TIM_NCC
 
 'Báo cáo
-(Quản lý báo cáo) as QLBC
-note bottom of QLBC: Xem doanh thu, phí nhập, phí xuất hàng
+' (Quản lý báo cáo) as QLBC
+' note bottom of QLBC: Xem doanh thu, phí nhập, phí xuất hàng
 
 'Khách hàng
 (Quản lý khách hàng) as QLKH
@@ -57,7 +57,7 @@ note top of QLSP: Thêm/Sửa/Xóa sản phẩm
 
 'Giỏ hàng
 Usecase QLGH as "Quản lý giỏ hàng"
-note bottom of QLGH: Xem, thêm, cập nhật số lượng hoặc xóa sản phẩm khỏi giỏ hàng,  \nđặt hàng, xem lịch sử mua hàng,  theo dõi đơn hàng, yêu cầu hủy đơn hàng,  \nxác nhận hoặc cập nhật thông tin liên hệ và địa chỉ giao hàng.
+note bottom of QLGH: Xem, thêm, cập nhật số lượng hoặc xóa sản phẩm khỏi giỏ hàng,  tính tổng giá trị giỏ hàng, \nđặt hàng, xem lịch sử mua hàng,  theo dõi đơn hàng, yêu cầu hủy đơn hàng,  \nxác nhận hoặc cập nhật thông tin liên hệ và địa chỉ giao hàng.
 ' (Xem giỏ hàng) as XEM_GH
 '   XEM_GH .>  QLGH: extend
 
@@ -73,7 +73,7 @@ ChangePass .> Login : extend
 
 '>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>
 QLDMSP ...> Login : include
-QLBC ...> Login : include
+' QLBC ...> Login : include
 QLDH ...> Login : include
 QLGH ...> Login : include
 QLSP ...> Login : include
@@ -88,7 +88,7 @@ NVQL ----> QLDMSP
 NVQL --> QLKHO
 NVQL --> QLNV
 NVQL --> QLNCC
-NVQL --> QLBC
+' NVQL --> QLBC
 NVQL --> QLKH 
 NVQL --> QLDH 
 

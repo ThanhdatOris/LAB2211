@@ -91,7 +91,9 @@ class Order {
 
 class OrderItem {
     + ID: string
-    + price: double
+    + product_name: string
+    + price_at_order: double
+    + subtotal: double
     + quantity: int
     'Method
 }
@@ -121,6 +123,7 @@ class GoodsReceived {
     + ID: string
     + receipt_date: date
     + total_price: double
+    + total_quantity: double
     + note: string
     'Method
 }
@@ -160,9 +163,9 @@ class Category {
 Product "0..*" -up-- "1" Category
 Product "0..*" -down- "1..*" Cart
 (Cart, Product) . CartItem
-Product "0..*" -down-- "1..*" Order
+Product "0..*" -down-- "0..*" Order
 (Product, Order) .. OrderItem
-Product "1..*" -left-- "1..*" GoodsReceived
+Product "0..*" -left-- "0..*" GoodsReceived
 (GoodsReceived, Product) . GoodsReceivedItem
 
 GoodsReceived "1..n" -up-- "1" Supplier
