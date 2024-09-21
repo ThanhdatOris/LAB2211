@@ -51,7 +51,7 @@ class Product {
     + dimension: string
     + standard: string
     + color: string
-    + style: string
+    + type: string
     + brand: string
     + warranty_period : string
     + description: string
