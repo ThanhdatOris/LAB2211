@@ -157,7 +157,7 @@ class Category {
 '     + purpose : string
 ' }
 
-'-------------------------Connection-------------------------
+'--------------------Connection---------------------
 
 
 Product "0..*" -up-- "1" Category
@@ -175,7 +175,7 @@ Cart "1" -down-- "1" Customer
 Cart "1" -right- "1" Order : Checkout
 
 Order "0..*" -left-- "1" Customer: has 
-Order "0..*" -right-- "1" SaleStaff: creates orders for
+Order "0..*" -right-- "1" SaleStaff: created
 Order "1" -up-- "0..1" Invoice: has
 
 Category "1..*" -right-- "1" Manager

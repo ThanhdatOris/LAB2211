@@ -13,7 +13,7 @@ ui_manageProduct -> ui_addProduct: Yêu cầu hiển thị
 deactivate ui_manageProduct
 
 activate ui_addProduct
-ui_addProduct --> user: Hiển thị form nhập sản phẩm
+ui_addProduct --> user: Hiển thị UI nhập sản phẩm
 user -> ui_addProduct: Nhập thông tin sản phẩm
 note right of user
 Thông tin sản phẩm:tên sản phẩm, giá, 
@@ -49,4 +49,62 @@ activate ui_addProduct
 deactivate ui_addProduct
 end
 deactivate user
+@enduml
+
+'Sửa sản phẩm
+@startuml SequenceUpdateProduct
+actor User as user
+boundary "UI: Quản lý sản phẩm" as ui_manageProduct
+boundary "UI: Sửa sản phẩm" as ui_editProduct
+control "Ctrl: Sửa sản phẩm" as ctrl_editProduct
+database database
+
+activate user
+user -> ui_manageProduct: Chọn "Sửa sản phẩm"
+
+activate ui_manageProduct
+ui_manageProduct -> ui_editProduct: Yêu cầu hiển thị thông tin sản phẩm
+deactivate ui_manageProduct
+
+activate ui_editProduct
+ui_editProduct -> ctrl_editProduct: Yêu cầu hiển thị
+ctrl_editProduct -> ctrl_editProduct: Gọi UC: Xem sản phẩm
+ctrl_editProduct --> ui_editProduct: Thông tin sản phẩm
+ui_editProduct --> user: Hiển thị UI nhập sản phẩm
+user -> ui_editProduct: Nhập thông tin sản phẩm
+note right of user
+Thông tin sản phẩm: tên sản phẩm, giá, 
+đơn vị tính, chất liệu, kích thước, 
+tiêu chuẩn, màu sắc, kiểu loại, thương hiệu, 
+bảo hành, mô tả, hình ảnh
+end note
+ui_editProduct -> ctrl_editProduct: Thông tin sản phẩm và nhấn "Lưu"
+deactivate ui_editProduct
+activate ctrl_editProduct
+
+
+ctrl_editProduct -> ctrl_editProduct: Kiểm tra hợp lệ và tồn tại
+
+alt#Gold #Pink Lỗi không hợp lệ và tồn tại
+    ctrl_editProduct -> ui_editProduct: Thông báo lỗi
+    deactivate ctrl_editProduct
+activate ui_editProduct
+    ui_editProduct -> user: Thông báo lỗi
+deactivate ui_editProduct
+else #LightBlue Thông tin đã hợp lệ
+    
+    ctrl_editProduct -> database : Thông tin sản phẩm
+activate ctrl_editProduct
+activate database
+    database --> ctrl_editProduct: Thông báo thành công
+deactivate database
+
+    ctrl_editProduct --> ui_editProduct: Thông báo thành công
+deactivate ctrl_editProduct
+activate ui_editProduct
+    ui_editProduct --> user: Thông báo thành công
+deactivate ui_editProduct
+end
+deactivate user
+
 @enduml
