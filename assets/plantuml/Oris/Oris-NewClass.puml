@@ -1,10 +1,10 @@
-@startuml ClassSN
+@startuml Class
 
 left to right direction
 
 skinparam {
     shadowing false
-    backgroundColor #FFFFFF
+    backgroundColor #FFFFFF/#FEFEFE
     class {
         BackgroundColor #F5F5F7/#C1CFA1
         ArrowColor #A5B68D
@@ -100,10 +100,15 @@ class Order {
     + totalPrice: Double
     + orderDate: Date
     + orderStatus: Int
+    + paymentStatus: String
+    + paymentMethod: String
+    + invoiceNumber: String
+    + invoiceDate: Date
 
     + placeOrder(): void
     + cancelOrder(): void
     + updateStatus(): void
+    + generateInvoice(): void
 }
 
 class OrderItem {
@@ -112,14 +117,6 @@ class OrderItem {
     + priceAtOrder: Double
     + subtotal: Double
     + quantity: Int
-}
-
-class Invoice {
-    + id: String
-    + invoiceDate: Date
-    + totalPrice: Double
-    + paymentStatus: String
-    + paymentMethod: String
 }
 
 '--- Import ---
@@ -135,7 +132,7 @@ class Supplier {
     + active: Boolean
 }
 
-class GoodsReceived {
+class Shipment {
     + id: String
     + receiptDate: Date
     + totalPrice: Double
@@ -143,7 +140,7 @@ class GoodsReceived {
     + note: String
 }
 
-class ReceivedItem {
+class Goods {
     + id: String
     + quantity: Int
     + importPrice: Double
@@ -154,7 +151,7 @@ class Category {
     + id: String
     + parentId: Int
     + name: String
-    + roomType: String 
+    + roomType: String
     + usageType: String
     + description: String
     + active: Boolean
@@ -163,28 +160,27 @@ class Category {
 '-------------------------Connection-------------------------
 ' Define relationships between classes
 
-Product "0..*" -up-- "1" Category : belongs to
+Product "0..*" o-up-- "1" Category : belongs to
 Product "0..*" -down- "1..*" Cart : contains
 (Cart, Product) . CartItem : consists of
 Product "0..*" -down-- "0..*" Order : includes
 (Product, Order) .. OrderItem : contains
-Product "0..*" -left-- "0..*" GoodsReceived : part of
-(GoodsReceived, Product) . ReceivedItem : consists of
+Product "0..*" -left-- "0..*" Shipment : part of
+(Shipment, Product) . Goods : consists of
 
-GoodsReceived "1..n" -up-- "1" Supplier : supplied by
-GoodsReceived "0..*" -up-- "1" Manager : managed by
+Shipment "1..n" -up-- "1" Supplier : supplied by
+Shipment "0..*" -up-- "1" Manager : managed by
 
 Cart "1" -down-- "1" Customer : owned by
 Cart "1" -right- "1" Order : checkout
 
 Order "0..*" -left-- "1" Customer : has
 Order "0..*" -right-- "1" SaleStaff : created by
-Order "1" -up-- "0..1" Invoice : has
 
 Category "1..*" -right-- "1" Manager : managed by
 
-Customer --|> User : inherits
-SaleStaff --|> User : inherits
-Manager --|> User : inherits
+Customer --|> User
+SaleStaff --|> User
+Manager --|> User
 
 @enduml
