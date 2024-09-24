@@ -2,163 +2,166 @@
 
 left to right direction
 
+skinparam {
+    shadowing false
+    backgroundColor #FFFFFF
+    class {
+        BackgroundColor #F5F5F7/#C1CFA1
+        ArrowColor #A5B68D
+        BorderColor #EDE8DC
+        FontName "Montserrat"
+        FontSize 18
+        FontColor #333333
+        StereotypeFontColor #666666
+        StereotypeFontSize 15
+        StereotypeFontName "Montserrat"
+        roundCorner 10
+    }
+}
+
 ' --------------- ACTOR ---------------
+' Define user-related classes
 
 class User {
-    + ID: string
-    + fullname: string
-    + phone_number: string
-    + address: string
-    + gender: string
-    + dateOfBirth: string
-    + password: string
+    + id: String
+    + fullName: String
+    + phoneNumber: String
+    + address: String
+    + gender: String
+    + dateOfBirth: String
+    + password: String
 
-    'Method
-    + ChangePassword(): void
-    + ForgotPassword(): void
-    + UpdateProfile(): void
-
+    + changePassword(): void
+    + forgotPassword(): void
+    + updateProfile(): void
 }
 
 class Manager {
-    + citizen_id: string
-    'Method
-    + ChangeInfo(): void
-    
+    + citizenId: String
+
+    + changeInfo(): void
 }
 
 class SaleStaff {
-    + citizen_id: string
-    + dateOfIssue: date
-    + placeOfIssue: string
-    'Method
-    + PlaceOrderForCustomer(): void
+    + citizenId: String
+    + issuingDate: Date
+    + issuingPlace: String
+
+    + assistCustomerOrder(): void
 }
 
 class Customer {
-    'Method
-    + ChangeInfo(): void
-    + ViewOrderHistory(): void
+    + changeInfo(): void
+    + viewOrderHistory(): void
 }
 
 ' --------------- UC ---------------
+' Define product-related classes
+
 class Product {
-    + ID: string
-    + name: string
-    + price: double
-    + unit: string
-    + material: string
-    + dimension: string
-    + standard: string
-    + color: string
-    + type: string
-    + brand: string
-    + warranty_period : string
-    + description: string
-    + image: list<string>
-    + active: bool
-    'Method
+    + id: String
+    + name: String
+    + price: Double
+    + unit: String
+    + material: String
+    + dimension: String
+    + standard: String
+    + color: String
+    + type: String
+    + brand: String
+    + warrantyPeriod: String
+    + description: String
+    + images: List<String>
+    + active: Boolean
 }
 
 '--- Export ---
+' Define cart-related classes
+
 class Cart {
-    + ID: string
-    + totalPrice: double
-    'Method
-    + AddItem(): void
-    + RemoveItem(): void
-    + CalculateTotal(): void
-    + ClearCart(): void
-}   
+    + id: String
+    + totalPrice: Double
+
+    + addItem(): void
+    + removeItem(): void
+    + calculateTotal(): void
+    + clearCart(): void
+}
 
 class CartItem {
-    + ID: string
-    + quantity: int
-    + price: double
+    + id: String
+    + quantity: Int
+    + price: Double
 }
 
 class Order {
-    + ID: string
-    + customer_phone_number: string
-    + total_price: double
-    + order_date: date
-    + order_status: int
-    'Method
-    + PlaceOrder(): void
-    + CancelOrder(): void
-    + UpdateStatus(): void
+    + id: String
+    + customerPhoneNumber: String
+    + totalPrice: Double
+    + orderDate: Date
+    + orderStatus: Int
+
+    + placeOrder(): void
+    + cancelOrder(): void
+    + updateStatus(): void
 }
 
 class OrderItem {
-    + ID: string
-    + product_name: string
-    + price_at_order: double
-    + subtotal: double
-    + quantity: int
-    'Method
+    + id: String
+    + productName: String
+    + priceAtOrder: Double
+    + subtotal: Double
+    + quantity: Int
 }
 
 class Invoice {
-    + ID: string
-    + Invoice_Date: date
-    + total_price: double
-    + Payment_Status: string
-    + Payment_Method: string
+    + id: String
+    + invoiceDate: Date
+    + totalPrice: Double
+    + paymentStatus: String
+    + paymentMethod: String
 }
 
-
 '--- Import ---
+' Define supplier and goods received classes
+
 class Supplier {
-    + ID: string
-    + display_name: string
-    + address: string
-    + email: string
-    + phone_number: string
-    + image: string
-    + active: bool
-    'Method
+    + id: String
+    + displayName: String
+    + address: String
+    + email: String
+    + phoneNumber: String
+    + image: String
+    + active: Boolean
 }
 
 class GoodsReceived {
-    + ID: string
-    + receipt_date: date
-    + total_price: double
-    + total_quantity: double
-    + note: string
-    'Method
+    + id: String
+    + receiptDate: Date
+    + totalPrice: Double
+    + totalQuantity: Double
+    + note: String
 }
 
-class GoodsReceivedItem {
-    + ID: string
-    + quantity: int
-    + import_price: double
-    + total_price: double
+class ReceivedItem {
+    + id: String
+    + quantity: Int
+    + importPrice: Double
+    + totalPrice: Double
 }
 
 class Category {
-    + ID: string
-    + parent_id: int
-    + name: string
-    + room_type: string 
-    + usage_type : string
-    + description: string
-    + active: bool
+    + id: String
+    + parentId: Int
+    + name: String
+    + roomType: String 
+    + usageType: String
+    + description: String
+    + active: Boolean
 }
 
-' class Image {
-'     + ID: string
-'     + image_url: string
-'     + image_type: string
-'     + description: string
-' }
-
-' class ProductImage {
-'     + ID: string
-'     + purpose : string
-' }
-
 '-------------------------Connection-------------------------
-
+' Define relationships between classes
 
 Product "0..*" -up-- "1" Category : belongs to
 Product "0..*" -down- "1..*" Cart : contains
@@ -166,7 +169,7 @@ Product "0..*" -down- "1..*" Cart : contains
 Product "0..*" -down-- "0..*" Order : includes
 (Product, Order) .. OrderItem : contains
 Product "0..*" -left-- "0..*" GoodsReceived : part of
-(GoodsReceived, Product) . GoodsReceivedItem : consists of
+(GoodsReceived, Product) . ReceivedItem : consists of
 
 GoodsReceived "1..n" -up-- "1" Supplier : supplied by
 GoodsReceived "0..*" -up-- "1" Manager : managed by
@@ -174,7 +177,7 @@ GoodsReceived "0..*" -up-- "1" Manager : managed by
 Cart "1" -down-- "1" Customer : owned by
 Cart "1" -right- "1" Order : checkout
 
-Order "0..*" -left-- "1" Customer : has 
+Order "0..*" -left-- "1" Customer : has
 Order "0..*" -right-- "1" SaleStaff : created by
 Order "1" -up-- "0..1" Invoice : has
 
