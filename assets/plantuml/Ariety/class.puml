@@ -103,7 +103,7 @@ class Invoice {
 
 class Supplier {
     + id: string
-    + display_name: string
+    + displayName: string
     + address: string
     + email: string
     + phoneNumber: string
@@ -140,25 +140,34 @@ class Category {
 
 
 
-Product "0..*" -up-- "1" Category
-Product "0..*" -down- "1..*" Cart
+Product "1..*" -up-- "1" Category: belongs to
+Product "1..*" -down- "1..*" Cart: added to
+' sp duoc them vao gh
 (Cart, Product) . CartItem
-Product "0..*" -down-- "1..*" Order
+Product "1..*" -down-- "1..*" Order: includes
+' sp nam trong dh
 (Product, Order) .. OrderItem
-Product "1..*" -left-- "1..*" GoodsReceived
+Product "1..*" -left-- "1..*" GoodsReceived: includes
 (GoodsReceived, Product) . GoodsReceivedItem
 
-GoodsReceived "1..n" -up-- "1" Supplier
-GoodsReceived "0..*" -up-- "1" Managerment: Manage
 
-Cart "1" -down-- "1" Customer
-Cart "1" -right-> "1" Order : Checkout
+GoodsReceived "1..*" -up-- "1" Supplier: is from
+' pnh den tu ncc
+GoodsReceived "0..*" -up-- "1" Managerment: manage
+
+
+Cart "1" -down-- "1" Customer: has
+Cart "1" -right-> "1" Order : changes to
+' gh thay doi thanh dh. khi kh thanh toan
+
 
 Order "0..*" -left-- "1" Customer: has
-Order "0..*" -right-- "1" SaleStaff: creates orders for
+Order "1..*" -right-- "1" SaleStaff: creates
 Order "1" -up-- "0..1" Invoice: has
 
-Category "1..*" -right-- "1" Managerment
+
+Category "1..*" -right-- "1" Managerment: manage
+
 
 Customer --|> User
 SaleStaff --|> User
