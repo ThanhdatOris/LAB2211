@@ -3,7 +3,7 @@ actor "Quản lý/ NVBH/ KH" as actor
 boundary "UI: Đăng nhập" as ui_login
 control "Ctrl: Đăng nhập" as ctrl_login
 entity "User" as user
-database Database
+database database
 
 activate ui_login
     actor -> ui_login: Nhập tên và tài khoản
@@ -25,9 +25,9 @@ alt #Pink tài khoản và mật khẩu hợp lệ
 alt #LightBlue  tài khoản và mật khẩu tồn tại
     user -> ctrl_login : Thông báo tồn tại
     activate ctrl_login
-    activate Database
-    ctrl_login -> Database: Hiển thị giao diện
-    deactivate Database
+    activate database
+    ctrl_login -> database: Hiển thị giao diện
+    deactivate database
 
 else #Yellow
     user -> ctrl_login: Thông báo không tồn tại
