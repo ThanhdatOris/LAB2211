@@ -1,9 +1,9 @@
 @startuml SequenceLogin
 actor "Quản lý/ NVBH/ KH" as actor
-boundary "UI: Đăng nhập" as ui_login
-control "Ctrl: Đăng nhập" as ctrl_login
+boundary "Đăng nhập" as ui_login
+control "Đăng nhập" as ctrl_login
 entity "User" as user
-database database
+boundary "Hệ thống" as system
 
 activate ui_login
     actor -> ui_login: Nhập tên và tài khoản
@@ -14,20 +14,19 @@ activate ctrl_login
     ui_login -> ctrl_login: Gửi tên tài khoản và mật khẩu
     ctrl_login -> ctrl_login: Kiểm tra hợp lệ và tồn tại
 deactivate ctrl_login
-
-
-alt #Pink tài khoản và mật khẩu hợp lệ
+ 
+group #Pink Kiểm tra hợp lệ [tài khoản và mật khẩu hợp lệ]
     ctrl_login -> user: Gửi tên tài khoản, mật khẩu
     activate user
     user -> user: Kiểm tra tồn tại
     deactivate user
 
-alt #LightBlue  tài khoản và mật khẩu tồn tại
+group #LightBlue Kiểm tra tồn tại  [tài khoản và mật khẩu tồn tại]
     user -> ctrl_login : Thông báo tồn tại
     activate ctrl_login
-    activate database
-    ctrl_login -> database: Hiển thị giao diện
-    deactivate database
+    activate system
+    ctrl_login -> system: Hiển thị giao diện
+    deactivate system
 
 else #Yellow
     user -> ctrl_login: Thông báo không tồn tại
