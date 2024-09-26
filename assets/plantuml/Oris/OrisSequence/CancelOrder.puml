@@ -38,7 +38,7 @@ activate ctrl_cancelOrder
 ctrl_cancelOrder -> staff: Yêu cầu chấp nhận \nhoặc từ chối\nhủy đơn hàng
 activate staff
 
-alt #Gold #Pink Nhân viên từ chối hủy đơn hàng
+alt#Gold #Pink Nhân viên từ chối hủy đơn hàng
     staff -> ctrl_cancelOrder: Từ chối hủy đơn hàng
     deactivate staff
     ctrl_cancelOrder -> ui_cancelOrder: Thông báo từ chối
