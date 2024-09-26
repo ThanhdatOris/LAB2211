@@ -1,0 +1,65 @@
+@startuml SequenceCancelOrder
+actor User as user
+boundary "UI: Quản lý đơn hàng" as ui_manageOrder
+boundary "UI: Yêu cầu hủy đơn hàng" as ui_cancelOrder
+control "Ctrl: Yêu cầu hủy đơn hàng" as ctrl_cancelOrder
+actor "Nhân viên" as staff
+database database
+
+activate user
+user -> ui_manageOrder: Chọn \n"Yêu cầu hủy đơn hàng"
+
+activate ui_manageOrder
+ui_manageOrder -> ui_cancelOrder: Yêu cầu hiển thị\nthông tin đơn hàng
+deactivate ui_manageOrder
+
+activate ui_cancelOrder
+ui_cancelOrder -> ctrl_cancelOrder: Yêu cầu thông tin đơn hàng
+deactivate ui_cancelOrder
+activate ctrl_cancelOrder
+
+ctrl_cancelOrder -> database: Lấy thông tin đơn hàng
+activate database
+database --> ctrl_cancelOrder: Trả về thông tin đơn hàng
+deactivate database
+
+ctrl_cancelOrder --> ui_cancelOrder: Thông tin đơn hàng
+deactivate ctrl_cancelOrder
+activate ui_cancelOrder
+ui_cancelOrder --> user: Hiển thị thông tin đơn hàng
+deactivate ui_cancelOrder
+
+user -> ui_cancelOrder: Xác nhận yêu cầu hủy đơn hàng
+activate ui_cancelOrder
+ui_cancelOrder -> ctrl_cancelOrder: Gửi yêu cầu hủy đơn hàng
+deactivate ui_cancelOrder
+activate ctrl_cancelOrder
+
+ctrl_cancelOrder -> staff: Yêu cầu chấp nhận \nhoặc từ chối\nhủy đơn hàng
+activate staff
+
+alt #Gold #Pink Nhân viên từ chối hủy đơn hàng
+    staff -> ctrl_cancelOrder: Từ chối hủy đơn hàng
+    deactivate staff
+    ctrl_cancelOrder -> ui_cancelOrder: Thông báo từ chối
+    deactivate ctrl_cancelOrder
+    activate ui_cancelOrder
+    ui_cancelOrder -> user: Thông báo từ chối
+    deactivate ui_cancelOrder
+else #LightBlue Nhân viên chấp nhận hủy đơn hàng
+    staff -> ctrl_cancelOrder: Chấp nhận hủy đơn hàng
+    deactivate staff
+    ctrl_cancelOrder -> database: Cập nhật trạng thái đơn hàng
+    activate database
+    database --> ctrl_cancelOrder: Thông báo thành công
+    deactivate database
+    ctrl_cancelOrder -> ui_cancelOrder: Thông báo thành công
+    deactivate ctrl_cancelOrder
+    activate ui_cancelOrder
+    ui_cancelOrder -> user: Thông báo thành công
+    deactivate ui_cancelOrder
+end
+
+deactivate user
+
+@enduml

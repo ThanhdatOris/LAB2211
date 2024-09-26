@@ -1,0 +1,116 @@
+@startuml SequenceManageCart
+actor User as user
+boundary "UI: Quản lý giỏ hàng" as ui_manageCart
+control "Ctrl: Quản lý giỏ hàng" as ctrl_manageCart
+control "Ctrl: Thanh toán giỏ hàng" as ctrl_checkout
+database database
+
+activate user
+user -> ui_manageCart: Chọn "Xem giỏ hàng"
+
+activate ui_manageCart
+ui_manageCart -> ctrl_manageCart: Yêu cầu thông tin giỏ hàng
+deactivate ui_manageCart
+activate ctrl_manageCart
+
+ctrl_manageCart -> database: Lấy thông tin giỏ hàng
+activate database
+database --> ctrl_manageCart: Trả về thông tin giỏ hàng
+deactivate database
+
+ctrl_manageCart --> ui_manageCart: Thông tin giỏ hàng
+deactivate ctrl_manageCart
+activate ui_manageCart
+ui_manageCart --> user: Hiển thị thông tin giỏ hàng
+deactivate ui_manageCart
+
+user -> ui_manageCart: Thêm sản phẩm vào giỏ hàng
+activate ui_manageCart
+ui_manageCart -> ctrl_manageCart: Thông tin sản phẩm cần thêm
+deactivate ui_manageCart
+activate ctrl_manageCart
+
+ctrl_manageCart -> ctrl_manageCart: Kiểm tra sản phẩm hợp lệ
+
+alt#Gold #Pink Sản phẩm không hợp lệ hoặc đã tồn tại
+    ctrl_manageCart -> ui_manageCart: Thông báo lỗi
+    deactivate ctrl_manageCart
+activate ui_manageCart
+    ui_manageCart -> user: Thông báo lỗi
+deactivate ui_manageCart
+else #LightBlue Sản phẩm hợp lệ
+    
+    ctrl_manageCart -> database: Thêm sản phẩm \nvào giỏ hàng
+activate ctrl_manageCart
+activate database
+    database --> ctrl_manageCart: Thông báo thành công
+deactivate database
+
+    ctrl_manageCart --> ui_manageCart: Thông báo thành công
+deactivate ctrl_manageCart
+activate ui_manageCart
+    ui_manageCart --> user: Thông báo thành công
+deactivate ui_manageCart
+end
+
+user -> ui_manageCart: Xóa sản phẩm khỏi giỏ hàng
+activate ui_manageCart
+ui_manageCart -> ctrl_manageCart: Thông tin sản phẩm cần xóa
+deactivate ui_manageCart
+activate ctrl_manageCart
+
+ctrl_manageCart -> ctrl_manageCart: Kiểm tra sản phẩm hợp lệ
+
+alt#Gold #Pink Sản phẩm không hợp lệ hoặc không tồn tại
+    ctrl_manageCart -> ui_manageCart: Thông báo lỗi
+    deactivate ctrl_manageCart
+activate ui_manageCart
+    ui_manageCart -> user: Thông báo lỗi
+deactivate ui_manageCart
+else #LightBlue Sản phẩm hợp lệ
+    
+    ctrl_manageCart -> database: Xóa sản phẩm \nkhỏi giỏ hàng
+activate ctrl_manageCart
+activate database
+    database --> ctrl_manageCart: Thông báo thành công
+deactivate database
+
+    ctrl_manageCart --> ui_manageCart: Thông báo thành công
+deactivate ctrl_manageCart
+activate ui_manageCart
+    ui_manageCart --> user: Thông báo thành công
+deactivate ui_manageCart
+end
+
+user -> ui_manageCart: Chọn "Thanh toán giỏ hàng"
+activate ui_manageCart
+ui_manageCart -> ctrl_checkout: Yêu cầu thanh toán giỏ hàng
+deactivate ui_manageCart
+activate ctrl_checkout
+
+ctrl_checkout -> ctrl_checkout: Kiểm tra \nthông tin giỏ hàng \nvà thanh toán
+
+alt#Gold #Pink Lỗi thanh toán
+    ctrl_checkout -> ui_manageCart: Thông báo lỗi
+    deactivate ctrl_checkout
+activate ui_manageCart
+    ui_manageCart -> user: Thông báo lỗi
+deactivate ui_manageCart
+else #LightBlue Thanh toán thành công
+    
+    ctrl_checkout -> database: Cập nhật \ntrạng thái đơn hàng
+activate ctrl_checkout
+activate database
+    database --> ctrl_checkout: Thông báo thành công
+deactivate database
+
+    ctrl_checkout --> ui_manageCart: Thông báo thành công
+deactivate ctrl_checkout
+activate ui_manageCart
+    ui_manageCart --> user: Thông báo thành công
+deactivate ui_manageCart
+end
+
+deactivate user
+
+@enduml

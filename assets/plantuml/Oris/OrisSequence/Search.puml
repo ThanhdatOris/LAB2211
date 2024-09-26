@@ -1,0 +1,39 @@
+@startuml SequenceSearchProduct
+actor User as user
+boundary "UI: Tìm kiếm sản phẩm" as ui_searchProduct
+control "Ctrl: Tìm kiếm sản phẩm" as ctrl_searchProduct
+database database
+
+activate user
+user -> ui_searchProduct: Nhập từ khóa tìm kiếm
+
+activate ui_searchProduct
+ui_searchProduct -> ctrl_searchProduct: Gửi từ khóa tìm kiếm
+deactivate ui_searchProduct
+activate ctrl_searchProduct
+
+ctrl_searchProduct -> ctrl_searchProduct: Kiểm tra từ khóa
+
+alt#Gold #Pink Từ khóa không hợp lệ
+    ctrl_searchProduct -> ui_searchProduct: Thông báo lỗi
+    deactivate ctrl_searchProduct
+activate ui_searchProduct
+    ui_searchProduct -> user: Thông báo lỗi
+deactivate ui_searchProduct
+else #LightBlue Từ khóa hợp lệ
+    
+    ctrl_searchProduct -> database : Tìm kiếm sản phẩm
+activate ctrl_searchProduct
+activate database
+    database --> ctrl_searchProduct: Trả về kết quả tìm kiếm
+deactivate database
+
+    ctrl_searchProduct --> ui_searchProduct: Kết quả tìm kiếm
+deactivate ctrl_searchProduct
+activate ui_searchProduct
+    ui_searchProduct --> user: Hiển thị kết quả tìm kiếm
+deactivate ui_searchProduct
+end
+deactivate user
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml SequenceDeleteProduct-Oris
+
+actor User as user
+boundary "UI: Quản lý sản phẩm" as ui_manageProduct
+boundary "UI: Xóa sản phẩm" as ui_deleteProduct
+control "Ctrl: Xóa sản phẩm" as ctrl_deleteProduct
+database database
+
+activate user
+user -> ui_manageProduct: Chọn "Xóa sản phẩm"
+
+activate ui_manageProduct
+ui_manageProduct -> ui_deleteProduct: Yêu cầu hiển thị\n thông tin sản phẩm
+deactivate ui_manageProduct
+
+note right of user
+Các usecase xóa khác
+cũng tương tự như vậy.
+end note
+
+activate ui_deleteProduct
+ui_deleteProduct -> ctrl_deleteProduct: Yêu cầu hiển thị
+ctrl_deleteProduct -> ctrl_deleteProduct: Gọi UC: Xem sản phẩm
+ctrl_deleteProduct --> ui_deleteProduct: Thông tin sản phẩm
+ui_deleteProduct --> user: Hiển thị UI xác nhận xóa sản phẩm
+user -> ui_deleteProduct: Xác nhận xóa sản phẩm
+ui_deleteProduct -> ctrl_deleteProduct: Thông tin sản phẩm \nvà nhấn "Xóa"
+deactivate ui_deleteProduct
+activate ctrl_deleteProduct
+
+ctrl_deleteProduct -> ctrl_deleteProduct: Kiểm tra hợp lệ và tồn tại
+
+alt#Gold #Pink Lỗi không hợp lệ và tồn tại
+    ctrl_deleteProduct --> ui_deleteProduct: Thông báo lỗi
+    deactivate ctrl_deleteProduct
+    activate ui_deleteProduct
+    ui_deleteProduct --> user: Thông báo lỗi
+    deactivate ui_deleteProduct
+else #LightBlue Thông tin đã hợp lệ
+    ctrl_deleteProduct -> database : Xóa sản phẩm
+    activate database
+    database --> ctrl_deleteProduct: Thông báo thành công
+    deactivate database
+
+    ctrl_deleteProduct --> ui_deleteProduct: Thông báo thành công
+    deactivate ctrl_deleteProduct
+    activate ui_deleteProduct
+    ui_deleteProduct --> user: Thông báo thành công
+    deactivate ui_deleteProduct
+end
+deactivate user
+
+@enduml

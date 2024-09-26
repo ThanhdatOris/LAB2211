@@ -1,0 +1,42 @@
+@startuml SequenceTrackingOrder
+actor User as user
+boundary "UI: Quản lý đơn hàng" as ui_manageOrder
+boundary "UI: Theo dõi đơn hàng" as ui_trackOrder
+control "Ctrl: Theo dõi đơn hàng" as ctrl_trackOrder
+database "Database: Đơn hàng" as database
+
+activate user
+user -> ui_manageOrder: Chọn "Theo dõi đơn hàng"
+
+activate ui_manageOrder
+ui_manageOrder -> ui_trackOrder: Yêu cầu hiển thị \nthông tin đơn hàng
+deactivate ui_manageOrder
+
+activate ui_trackOrder
+ui_trackOrder -> ctrl_trackOrder: Yêu cầu\n thông tin đơn hàng
+deactivate ui_trackOrder
+activate ctrl_trackOrder
+
+ctrl_trackOrder -> ctrl_trackOrder: Kiểm tra hợp lệ \nvà tồn tại
+
+alt#Gold #Pink Lỗi không hợp lệ hoặc không tồn tại
+    ctrl_trackOrder -> ui_trackOrder: Thông báo lỗi
+    deactivate ctrl_trackOrder
+    activate ui_trackOrder
+    ui_trackOrder -> user: Thông báo lỗi
+    deactivate ui_trackOrder
+else #LightBlue Thông tin hợp lệ
+    ctrl_trackOrder -> database: Lấy thông tin\n đơn hàng
+    activate database
+    database --> ctrl_trackOrder: Trả về thông tin\n đơn hàng
+    deactivate database
+
+    ctrl_trackOrder --> ui_trackOrder: Thông tin đơn hàng
+    deactivate ctrl_trackOrder
+    activate ui_trackOrder
+    ui_trackOrder --> user: Hiển thị thông tin đơn hàng
+    deactivate ui_trackOrder
+end
+deactivate user
+
+@enduml

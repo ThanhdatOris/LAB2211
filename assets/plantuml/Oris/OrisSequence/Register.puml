@@ -1,0 +1,46 @@
+@startuml SequenceRegisterAccount
+actor User as user
+boundary "UI: Đăng ký tài khoản" as ui_register
+control "Ctrl: Đăng ký tài khoản" as ctrl_register
+database database
+
+activate user
+user -> ui_register: Chọn "Đăng ký tài khoản"
+
+activate ui_register
+ui_register --> user: Hiển thị form đăng ký
+user -> ui_register: Nhập thông tin đăng ký
+note right of user
+Thông tin đăng ký:
+tên, email, mật khẩu, 
+số điện thoại, địa chỉ
+end note
+ui_register -> ctrl_register: Gửi thông tin đăng ký
+deactivate ui_register
+activate ctrl_register
+
+ctrl_register -> ctrl_register: Kiểm tra hợp lệ và tồn tại
+
+alt#Gold #Pink Lỗi không hợp lệ hoặc đã tồn tại
+    ctrl_register --> ui_register: Thông báo lỗi
+    deactivate ctrl_register
+activate ui_register
+    ui_register --> user: Thông báo lỗi
+deactivate ui_register
+else #LightBlue Thông tin hợp lệ
+    
+    ctrl_register -> database : Lưu thông tin tài khoản
+activate ctrl_register
+activate database
+    database --> ctrl_register: Thông báo thành công
+deactivate database
+
+    ctrl_register --> ui_register: Thông báo thành công
+deactivate ctrl_register
+activate ui_register
+    ui_register --> user: Thông báo thành công
+deactivate ui_register
+end
+deactivate user
+
+@enduml
