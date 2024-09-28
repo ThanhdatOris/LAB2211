@@ -1,0 +1,186 @@
+@startuml Class
+
+left to right direction
+
+skinparam {
+    shadowing false
+    backgroundColor #FFFFFF/#FEFEFE
+    class {
+        BackgroundColor #F5F5F7/#C1CFA1
+        ArrowColor #A5B68D
+        BorderColor #EDE8DC
+        FontName "Montserrat"
+        FontSize 18
+        FontColor #333333
+        StereotypeFontColor #666666
+        StereotypeFontSize 15
+        StereotypeFontName "Montserrat"
+        roundCorner 10
+    }
+}
+
+' --------------- ACTOR ---------------
+' Define user-related classes
+
+class User {
+    + id: String
+    + fullName: String
+    + phoneNumber: String
+    + address: String
+    + gender: String
+    + dateOfBirth: String
+    + password: String
+
+    + changePassword(): void
+    + forgotPassword(): void
+    + updateProfile(): void
+}
+
+class Manager {
+    + citizenId: String
+
+    + changeInfo(): void
+}
+
+class SaleStaff {
+    + citizenId: String
+    + issuingDate: Date
+    + issuingPlace: String
+
+    + assistCustomerOrder(): void
+}
+
+class Customer {
+    + changeInfo(): void
+    + viewOrderHistory(): void
+}
+
+' --------------- UC ---------------
+' Define product-related classes
+
+class Product {
+    + id: String
+    + name: String
+    + price: Double
+    + unit: String
+    + material: String
+    + dimension: String
+    + standard: String
+    + color: String
+    + type: String
+    + brand: String
+    + warrantyPeriod: String
+    + description: String
+    + images: List<String>
+    + active: Boolean
+}
+
+'--- Export ---
+' Define cart-related classes
+
+class Cart {
+    + id: String
+    + totalPrice: Double
+
+    + addItem(): void
+    + removeItem(): void
+    + calculateTotal(): void
+    + clearCart(): void
+}
+
+class CartItem {
+    + id: String
+    + quantity: Int
+    + price: Double
+}
+
+class Order {
+    + id: String
+    + customerPhoneNumber: String
+    + totalPrice: Double
+    + orderDate: Date
+    + orderStatus: Int
+    + paymentStatus: String
+    + paymentMethod: String
+    + invoiceNumber: String
+    + invoiceDate: Date
+
+    + placeOrder(): void
+    + cancelOrder(): void
+    + updateStatus(): void
+    + generateInvoice(): void
+}
+
+class OrderItem {
+    + id: String
+    + productName: String
+    + priceAtOrder: Double
+    + subtotal: Double
+    + quantity: Int
+}
+
+'--- Import ---
+' Define supplier and goods received classes
+
+class Supplier {
+    + id: String
+    + displayName: String
+    + address: String
+    + email: String
+    + phoneNumber: String
+    + image: String
+    + active: Boolean
+}
+
+class Shipment {
+    + id: String
+    + receiptDate: Date
+    + totalPrice: Double
+    + totalQuantity: Double
+    + note: String
+}
+
+class Goods {
+    + id: String
+    + quantity: Int
+    + importPrice: Double
+    + totalPrice: Double
+}
+
+class Category {
+    + id: String
+    + parentId: Int
+    + name: String
+    + roomType: String
+    + usageType: String
+    + description: String
+    + active: Boolean
+}
+
+'-------------------------Connection-------------------------
+' Define relationships between classes
+
+Product "0..*" o-up-- "1" Category : belongs to
+Product "0..*" -down- "1..*" Cart : contains
+(Cart, Product) . CartItem : consists of
+Product "0..*" -down-- "0..*" Order : includes
+(Product, Order) .. OrderItem : contains
+Product "0..*" -left-- "0..*" Shipment : part of
+(Shipment, Product) . Goods : consists of
+
+Shipment "1..n" -up-- "1" Supplier : supplied by
+Shipment "0..*" -up-- "1" Manager : managed by
+
+Cart "1" -down-- "1" Customer : owned by
+Cart "1" -right- "1" Order : checkout
+
+Order "0..*" -left-- "1" Customer : has
+Order "0..*" -right-- "1" SaleStaff : created by
+
+Category "1..*" -right-- "1" Manager : managed by
+
+Customer --|> User
+SaleStaff --|> User
+Manager --|> User
+
+@enduml

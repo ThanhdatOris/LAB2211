@@ -10,16 +10,20 @@ actor "Nhân Viên Bán Hàng" as NVBH
 rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
 
 '>>>>>>>>>>>>>>> Khai báo >>>>>>>>>>>>>>>
-'Danh mục sp
+'Tài khoản
+Usecase QLTK as "Quản lý tài khoản"
+note bottom of QLTK: Thêm/ Sửa/ Xem thông tin cá nhân
+
+'Danh mục 
 Usecase QLDMSP as "Quản lý danh mục"
-note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
+note bottom of QLDMSP: Thêm/ Sửa/ Xóa/ Xem/ Tìm danh mục
 (Xem danh mục) as XEM_DMSP
 (Tìm danh mục) as TIM_DMSP
  TIM_DMSP <.. XEM_DMSP: extend
 
 'Kho hàng
 Usecase QLKHO as "Quản lý phiếu nhập kho"
-note bottom of QLKHO : Xem, tìm kiếm, tạo, cập nhật,  \nhủy phiếu nhập kho,  \ncập nhật số lượng tồn kho 
+note bottom of QLKHO : Xem/ Tìm/ Tạo/ Sửa/ Hủy phiếu nhập kho,  \nCập nhật số lượng tồn kho 
 (Xem số lượng tồn kho) as XEM_HANG
 (Xem phiếu xuất kho) as XEM_PXK
 (Tìm phiếu xuất kho) as TIM_PXK
@@ -27,11 +31,11 @@ TIM_PXK <. XEM_PXK: extend
 
 'Nhân viên
 Usecase QLNV as "Quản lý nhân viên"
-note bottom of QLNV: Thêm/Sửa/Xóa/Xem/Tìm nhân viên
+note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhân viên
 
 'Nhà cung cấp
 Usecase QLNCC as "Quản lý nhà cung cấp"
-note bottom of QLNCC: Thêm/Sửa/Xóa/Xem/Tìm nhà cung cấp
+note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhà cung cấp
 ' (Tìm nhà cung cấp) as TIM_NCC
 
 'Báo cáo
@@ -40,24 +44,29 @@ note bottom of QLNCC: Thêm/Sửa/Xóa/Xem/Tìm nhà cung cấp
 
 'Khách hàng
 (Quản lý khách hàng) as QLKH
-note top of QLKH: Thêm/Sửa/Xem/Tìm khách hàng
+note top of QLKH: Thêm/ Sửa/ Xem/ Tìm khách hàng
 
 'Đơn hàng
 Usecase QLDH as "Quản lý đơn hàng"
-note top of QLDH: Xem, tìm kiếm, thêm, sửa và hủy đơn hàng,  \nxác nhận, theo dõi và cập nhật trạng thái đơn hàng.
-' (Tìm đơn) as TIM_DH
-' (Xem đơn) as XEM_DH
+note top of QLDH: Xem/ Tìm/ Tạo/ Sửa/ Hủy đơn hàng, \nXác nhận/ Theo dõi đơn hàng \nCập nhật trạng thái đơn hàng.
+(Tìm đơn) as TIM_DH
+(Xem đơn) as XEM_DH
+(Theo dõi đơn hàng) as THEO_DOI_DH
+(Yêu cầu hủy đơn hàng) as YCHUY_DH
+TIM_DH <. XEM_DH: extend
+QLDH <... YCHUY_DH: extend
+QLDH <.. THEO_DOI_DH: extend
 
 'Sản phẩm
 Usecase QLSP as "Quản lý sản phẩm"
-note top of QLSP: Thêm/Sửa/Xóa sản phẩm
+note top of QLSP: Thêm/ Sửa/ Xóa sản phẩm
 (Xem sản phẩm) as XEM_SP
 (Tìm sản phẩm) as TIM_SP
  TIM_SP <. XEM_SP: extend
 
 'Giỏ hàng
 Usecase QLGH as "Quản lý giỏ hàng"
-note bottom of QLGH: Xem, thêm, cập nhật số lượng hoặc xóa sản phẩm khỏi giỏ hàng,  tính tổng giá trị giỏ hàng, \nđặt hàng, xem lịch sử mua hàng,  theo dõi đơn hàng, yêu cầu hủy đơn hàng,  \nxác nhận hoặc cập nhật thông tin liên hệ và địa chỉ giao hàng.
+note bottom of QLGH: Xem/ Thêm/ Sửa số lượng sản phẩm trong giỏ, \nXóa sản phẩm khỏi giỏ/ Tính tổng giá trị giỏ hàng, \nĐặt hàng/ Xem lịch sử mua hàng, \nTheo dõi đơn hàng/ Yêu cầu hủy đơn hàng, \nXác nhận đơn hàng/ Cập nhật thông tin liên hệ và \nđịa chỉ giao hàng.
 ' (Xem giỏ hàng) as XEM_GH
 '   XEM_GH .>  QLGH: extend
 
@@ -75,22 +84,24 @@ ChangePass .> Login : extend
 QLDMSP ...> Login : include
 ' QLBC ...> Login : include
 QLDH ...> Login : include
-QLGH ...> Login : include
+' QLGH ...> Login : include
 QLSP ...> Login : include
 QLNCC ...> Login : include
 QLKH ...> Login : include
 QLNV ...> Login : include
 QLKHO ...> Login : include
+Login <..  QLGH: include
 
-'----------- Nhân Viên Quản lý -----------
+'----------- Người Quản lý -----------
 NVQL --> QLSP
-NVQL ----> QLDMSP
+NVQL ---> QLDMSP
 NVQL --> QLKHO
 NVQL --> QLNV
 NVQL --> QLNCC
 ' NVQL --> QLBC
 NVQL --> QLKH 
 NVQL --> QLDH 
+NVQL --> QLTK 
 
 'Tài khoản
 ' NVQL ---> Login
@@ -99,7 +110,7 @@ NVQL --> QLDH
 QLSP <... TIM_SP: extend
 
 'Danh mục sp
-QLDMSP <..... TIM_DMSP: extend
+QLDMSP <.. TIM_DMSP: extend
 
 'Kho hàng
 QLKHO <... XEM_HANG: extend
@@ -115,20 +126,20 @@ QLKHO <... TIM_PXK: extend
 'Khách hàng
 
 'Đơn hàng
-
+QLDH <.. TIM_DH: extend
 
 '----------- Nhân Viên Bán Hàng -----------
 QLDH <- NVBH
 QLKH <-- NVBH
-
+QLTK <-- NVBH
 'Tài khoản
 ' Login <--- NVBH
 
 'Kho
-XEM_HANG <--- NVBH
+XEM_HANG <-- NVBH
 
 'Danh mục
-TIM_DMSP <---- NVBH
+TIM_DMSP <-- NVBH
 
 'Kho hàng
 TIM_PXK <--- NVBH
@@ -138,6 +149,7 @@ TIM_SP <-- NVBH
 
 '----------- Khách Hàng -----------
 QLGH <-- KH
+QLTK <-- KH
 
 'Tài khoản
 SignUp <- KH
@@ -151,6 +163,10 @@ TIM_SP <---- KH
 
 'Danh mục
 TIM_DMSP <--- KH
+
+'Đơn hàng
+YCHUY_DH <-- KH
+THEO_DOI_DH <-- KH
 
 }
 
