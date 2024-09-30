@@ -5,6 +5,40 @@
 @startuml
 
 skinparam shadowing false
+skinparam defaultFontName Montserrat
+skinparam defaultFontSize 30
+skinparam titleFontSize 50
+skinparam ArrowThickness 3
+skinparam ArrowMessageAlignment center
+skinparam ArrowHeadColor #FF677D
+
+
+skinparam note {
+    BackgroundColor #FFDDC1
+    BorderColor #FFABAB
+    FontName Montserrat
+}
+skinparam usecase {
+    BackgroundColor #FFABAB
+    BorderColor #FFC3A0
+    ArrowColor #FF677D
+    FontName Montserrat
+    BorderThickness 5
+}
+skinparam actor {
+    BackgroundColor #FFABAB
+    BorderColor #A28089
+    FontName "Montserrat BLack"
+    
+}
+
+skinparam rectangle {
+    FontName "Montserrat BLack"
+    BorderColor #FFC3A0
+    BorderThickness 5
+    ArrowColor #FF677D
+}
+
 left to right direction
 
 '------------- Actor -------------
@@ -169,6 +203,40 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 @startuml
 
 skinparam shadowing false
+skinparam defaultFontName Montserrat
+skinparam defaultFontSize 30
+skinparam titleFontSize 50
+skinparam ArrowThickness 3
+skinparam ArrowMessageAlignment center
+skinparam ArrowHeadColor #FF677D
+
+
+skinparam note {
+    BackgroundColor #FFDDC1
+    BorderColor #FFABAB
+    FontName Montserrat
+}
+skinparam usecase {
+    BackgroundColor #FFABAB
+    BorderColor #000
+    ArrowColor #FF677D
+    FontName Montserrat
+    BorderThickness 5
+}
+skinparam actor {
+    BackgroundColor #FFABAB
+    BorderColor #A28089
+    FontName "Montserrat BLack"
+    
+}
+
+skinparam rectangle {
+    FontName "Montserrat BLack"
+    BorderColor #FFC3A0
+    BorderThickness 5
+    ArrowColor #FF677D
+}
+
 left to right direction
 
 '------------- Actor -------------
