@@ -174,33 +174,49 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     '------------- UceeCase Tổng quát -------------
 
     'Quản lý Tài khoản
-    (QL tài khoản) as QLTK
-    'Quản lý Danh mục
-    (QL danh mục) as QLDM
-    'Quản lý Kho hàng
-    (QL phiếu nhập kho) as QLKHO
-    'Quản lý Nhân viên
-    (QL nhân viên) as QLNV
-    'Quản lý Nhà cung cấp
-    (QL nhà cung cấp) as QLNCC
-    'Quản lý Đơn hàng
-    (QL đơn hàng) as QLDH
-    'Quản lý Sản phẩm
-    (QL sản phẩm) as QLSP
-    'Quản lý Giỏ hàng
-    (QL giỏ hàng) as QLGH
-    'Quản lý Khách hàng
-    (QL khách hàng) as QLKH
+    Usecase QLTK as "Quản lý tài khoản
+    --
+    Xem, Sửa"
 
-    note bottom of QLTK: Xem, Sửa
-    note top of QLDM: Thêm, Sửa, Xóa, Xem, Tìm
-    note bottom of QLKHO: Xem, Tìm, Thêm, Sửa, Hủy phiếu nhập kho
-    note bottom of QLNV: Thêm, Sửa, Xóa, Xem
-    note bottom of QLNCC: Thêm, Sửa, Xóa, Xem
-    note top of QLDH: Xem, Tìm, Thêm, Sửa, Hủy, Xác nhận
-    note top of QLSP: Thêm, Sửa, Xóa
-    note bottom of QLGH: Xem, Cập nhật giỏ hàng / Đặt hàng \nXem lịch sử mua hàng
-    note bottom of QLKH: Thêm, Sửa, Xem, Tìm
+    'Quản lý Danh mục
+    Usecase QLDM as "Quản lý danh mục
+    --
+    Thêm, Sửa, Xóa, Xem, Tìm"
+
+    'Quản lý Kho hàng
+    Usecase QLKHO as "Quản lý phiếu nhập kho
+    --
+    Xem, Tìm, Thêm, Sửa, Hủy phiếu nhập kho"
+
+    'Quản lý Nhân viên
+    Usecase QLNV as "Quản lý nhân viên
+    --
+    Thêm, Sửa, Xóa, Xem"
+
+    'Quản lý Nhà cung cấp
+    Usecase QLNCC as "Quản lý nhà cung cấp
+    --
+    Thêm, Sửa, Xóa, Xem"
+
+    'Quản lý Đơn hàng
+    Usecase QLDH as "Quản lý đơn hàng
+    --
+    Xem, Tìm, Thêm, Sửa, Hủy, Xác nhận"
+
+    'Quản lý Sản phẩm
+    Usecase QLSP as "Quản lý sản phẩm
+    --
+    Thêm, Sửa, Xóa"
+
+    'Quản lý Giỏ hàng
+    Usecase QLGH as "Quản lý giỏ hàng
+    --
+    Xem, Cập nhật giỏ hàng / Đặt hàng \nXem lịch sử mua hàng"
+
+    'Quản lý Khách hàng
+    Usecase QLKH as "Quản lý khách hàng
+    --
+    Thêm, Sửa, Xem, Tìm"
 
     '------------- UceeCase Chi tiết -------------
 
