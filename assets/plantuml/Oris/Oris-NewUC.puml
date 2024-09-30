@@ -31,7 +31,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     'Quản lý Tài khoản
     (QL tài khoản) as QLTK
     'Quản lý Danh mục
-    (QL danh mục) as QLDMSP
+    (QL danh mục) as QLDM
     'Quản lý Kho hàng
     (QL phiếu nhập kho) as QLKHO
     'Quản lý Nhân viên
@@ -47,15 +47,15 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     'Quản lý Khách hàng
     (QL khách hàng) as QLKH
 
-    note bottom of QLTK: Xem / Sửa
-    note top of QLDMSP: Thêm/ Sửa/ Xóa/ Xem/ Tìm
-    note bottom of QLKHO: Xem/ Tìm/ Thêm/ Sửa/ Hủy phiếu nhập kho
-    note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem
-    note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem
-    note top of QLDH: Xem/ Tìm/ Thêm/ Sửa/ Hủy/ Xác nhận đơn hàng
-    note top of QLSP: Thêm/ Sửa/ Xóa
-    note bottom of QLGH: Xem/ Cập nhật giỏ hàng, Đặt hàng \nXem lịch sử mua hàng
-    note bottom of QLKH: Thêm/ Sửa/ Xem/ Tìm
+    note bottom of QLTK: Xem, Sửa
+    note top of QLDM: Thêm, Sửa, Xóa, Xem, Tìm
+    note bottom of QLKHO: Xem, Tìm, Thêm, Sửa, Hủy phiếu nhập kho
+    note bottom of QLNV: Thêm, Sửa, Xóa, Xem
+    note bottom of QLNCC: Thêm, Sửa, Xóa, Xem
+    note top of QLDH: Xem, Tìm, Thêm, Sửa, Hủy, Xác nhận
+    note top of QLSP: Thêm, Sửa, Xóa
+    note bottom of QLGH: Xem, Cập nhật giỏ hàng / Đặt hàng \nXem lịch sử mua hàng
+    note bottom of QLKH: Thêm, Sửa, Xem, Tìm
 
     '------------- UceeCase Chi tiết -------------
 
@@ -79,7 +79,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     ChangePass .> Login : extend
     
     'Tất cả các usecase đều include Login
-    QLDMSP ..> Login : include
+    QLDM ..> Login : include
     QLDH ..> Login : include
     QLSP ..> Login : include
     QLNCC ..> Login : include
@@ -96,7 +96,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 
     '----------- Quản lý -----------
 
-    NVQL --> QLDMSP
+    NVQL --> QLDM
     NVQL --> QLKHO
     NVQL --> QLNV
     NVQL --> QLNCC
@@ -106,7 +106,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     QLSP <... TIM_SP: extend
 
     'Danh mục sp
-    QLDMSP <.. XEM_DMSP: extend
+    QLDM <.. XEM_DMSP: extend
 
     'Kho hàng
     QLKHO <.. XEM_HANG  : extend
