@@ -47,15 +47,15 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
     'Quản lý Khách hàng
     (QL khách hàng) as QLKH
 
-    note bottom of QLTK: Thêm/ Sửa/ Xem thông tin cá nhân
-    note top of QLDMSP: Thêm/ Sửa/ Xóa/ Xem/ Tìm danh mục
+    note bottom of QLTK: Xem / Sửa
+    note top of QLDMSP: Thêm/ Sửa/ Xóa/ Xem/ Tìm
     note bottom of QLKHO: Xem/ Tìm/ Thêm/ Sửa/ Hủy phiếu nhập kho
-    note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhân viên
-    note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhà cung cấp
-    note top of QLDH: Xem/ Tìm/ Thêm/ Sửa/ Hủy đơn hàng, \nXác nhận đơn hàng
-    note top of QLSP: Thêm/ Sửa/ Xóa sản phẩm
-    note bottom of QLGH: Xem/ Cập nhật giỏ hàng, \nĐặt hàng/ Xem lịch sử mua hàng, \nXác nhận đơn hàng
-    note bottom of QLKH: Thêm/ Sửa/ Xem/ Tìm khách hàng
+    note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem
+    note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem
+    note top of QLDH: Xem/ Tìm/ Thêm/ Sửa/ Hủy/ Xác nhận đơn hàng
+    note top of QLSP: Thêm/ Sửa/ Xóa
+    note bottom of QLGH: Xem/ Cập nhật giỏ hàng, Đặt hàng \nXem lịch sử mua hàng
+    note bottom of QLKH: Thêm/ Sửa/ Xem/ Tìm
 
     '------------- UceeCase Chi tiết -------------
 
