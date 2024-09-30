@@ -1,3 +1,7 @@
+/'======================
+    Bắt đầu version 1
+======================='/
+
 @startuml
 
 skinparam shadowing false
@@ -144,7 +148,8 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 @enduml
 
 /'======================
-Hết vversion 1
+    Hết vversion 1
+======================='/
 
 
 
@@ -157,8 +162,8 @@ Hết vversion 1
 
 
 
-
-Bắt đầu version 2
+/'======================
+    Bắt đầu version 2
 ======================='/
 
 @startuml
