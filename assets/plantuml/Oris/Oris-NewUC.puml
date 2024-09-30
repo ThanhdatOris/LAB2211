@@ -20,9 +20,9 @@ actor "Khách Hàng" as KH
     ' NVQL --|> NV
     NV <|-- NVQL
     ' NVBH --|> NV
-    NV <|-- NVBH
+    NV <|-down- NVBH
     ' KH --|> GUEST
-    GUEST <|-- KH
+    GUEST <|-right- KH
 
 '------------- Boundary -------------
 
