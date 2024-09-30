@@ -49,12 +49,12 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 
     note bottom of QLTK: Thêm/ Sửa/ Xem thông tin cá nhân
     note top of QLDMSP: Thêm/ Sửa/ Xóa/ Xem/ Tìm danh mục
-    note bottom of QLKHO: Xem/ Tìm/ Tạo/ Sửa/ Hủy phiếu nhập kho
+    note bottom of QLKHO: Xem/ Tìm/ Thêm/ Sửa/ Hủy phiếu nhập kho
     note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhân viên
     note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhà cung cấp
-    note top of QLDH: Xem/ Tìm/ Tạo/ Sửa/ Hủy đơn hàng, \nXác nhận đơn hàng
+    note top of QLDH: Xem/ Tìm/ Thêm/ Sửa/ Hủy đơn hàng, \nXác nhận đơn hàng
     note top of QLSP: Thêm/ Sửa/ Xóa sản phẩm
-    note bottom of QLGH: Xem/ Thêm/ Sửa số lượng sản phẩm trong giỏ, \nĐặt hàng/ Xem lịch sử mua hàng, \nXác nhận đơn hàng
+    note bottom of QLGH: Xem/ Cập nhật giỏ hàng, \nĐặt hàng/ Xem lịch sử mua hàng, \nXác nhận đơn hàng
     note bottom of QLKH: Thêm/ Sửa/ Xem/ Tìm khách hàng
 
     '------------- UceeCase Chi tiết -------------
