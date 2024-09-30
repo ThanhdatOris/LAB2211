@@ -6,9 +6,8 @@
 
 skinparam shadowing false
 skinparam defaultFontName Montserrat
-skinparam defaultFontSize 30
-skinparam titleFontSize 50
-skinparam ArrowThickness 3
+skinparam defaultFontSize 20
+skinparam ArrowThickness 2
 skinparam ArrowMessageAlignment center
 skinparam ArrowHeadColor #FF677D
 
@@ -17,6 +16,7 @@ skinparam note {
     BackgroundColor #FFDDC1
     BorderColor #FFABAB
     FontName Montserrat
+    TextAlign center
 }
 skinparam usecase {
     BackgroundColor #FFABAB
@@ -26,10 +26,8 @@ skinparam usecase {
     BorderThickness 5
 }
 skinparam actor {
-    BackgroundColor #FFABAB
-    BorderColor #A28089
-    FontName "Montserrat BLack"
-    
+    BorderColor #FFABAB
+    BorderThickness 3
 }
 
 skinparam rectangle {
@@ -52,7 +50,7 @@ actor "Khách Hàng" as KH
     '----------- Kế thừa -----------
 
     ' NVQL --|> NV
-    NV <|-- NVQL
+    NV <|-left- NVQL
     ' NVBH --|> NV
     NV <|-down- NVBH
     ' KH --|> GUEST
@@ -87,12 +85,11 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 
     note bottom of QLTK: Xem, Sửa
     note top of QLDM: Thêm, Sửa, Xóa, Xem, Tìm
-    note bottom of QLKHO: Xem, Tìm, Thêm, Sửa, Hủy phiếu nhập kho
-    note bottom of QLNV: Thêm, Sửa, Xóa, Xem
+    note bottom of QLKHO: Xem, Tìm, Thêm, Sửa, Hủy
     note bottom of QLNCC: Thêm, Sửa, Xóa, Xem
-    note top of QLDH: Xem, Tìm, Thêm, Sửa, Hủy, Xác nhận
+    note bottom of QLDH: Xem, Tìm, Thêm, Sửa, Hủy, Xác nhận
     note top of QLSP: Thêm, Sửa, Xóa
-    note bottom of QLGH: Xem, Cập nhật giỏ hàng / Đặt hàng \nXem lịch sử mua hàng
+    note bottom of QLGH: Xem, Cập nhật giỏ hàng \nĐặt hàng \nXem lịch sử mua hàng
     note bottom of QLKH: Thêm, Sửa, Xem, Tìm
 
     '------------- UceeCase Chi tiết -------------
@@ -203,40 +200,6 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 @startuml
 
 skinparam shadowing false
-skinparam defaultFontName Montserrat
-skinparam defaultFontSize 30
-skinparam titleFontSize 50
-skinparam ArrowThickness 3
-skinparam ArrowMessageAlignment center
-skinparam ArrowHeadColor #FF677D
-
-
-skinparam note {
-    BackgroundColor #FFDDC1
-    BorderColor #FFABAB
-    FontName Montserrat
-}
-skinparam usecase {
-    BackgroundColor #FFABAB
-    BorderColor #000
-    ArrowColor #FF677D
-    FontName Montserrat
-    BorderThickness 5
-}
-skinparam actor {
-    BackgroundColor #FFABAB
-    BorderColor #A28089
-    FontName "Montserrat BLack"
-    
-}
-
-skinparam rectangle {
-    FontName "Montserrat BLack"
-    BorderColor #FFC3A0
-    BorderThickness 5
-    ArrowColor #FF677D
-}
-
 left to right direction
 
 '------------- Actor -------------
