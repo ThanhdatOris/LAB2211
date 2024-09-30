@@ -143,6 +143,24 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 
 @enduml
 
+/'======================
+Hết vversion 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bắt đầu version 2
+======================='/
+
 @startuml
 
 skinparam shadowing false
