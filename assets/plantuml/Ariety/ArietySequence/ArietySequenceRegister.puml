@@ -1,0 +1,55 @@
+@startuml SequenceLogin
+actor "Khách hàng" as actor
+boundary "Đăng kí" as ui_register
+control "Đăng kí" as ctrl_register
+database "Cơ sở dữ liệu" as db_register
+
+activate actor
+activate ui_register
+    actor -> ui_register: Điền thông tin
+note right of actor
+họ tên, ngày sinh
+số điện thoại,
+địa chỉ, email,..
+end note
+    actor -> ui_register: Nhấn nút "Đăng kí"
+    ui_register -> ctrl_register: Gửi thông tin
+deactivate ui_register
+
+activate ctrl_register
+    ctrl_register -> ctrl_register: Kiểm tra hợp lệ và tồn tại
+    ctrl_register -> db_register: Gửi thông tin
+activate db_register
+deactivate ctrl_register
+
+group #Pink Kiểm tra hợp lệ [tên tài khoản và mật khẩu không hợp lệ]
+    db_register -> db_register: Kiểm tra hợp lệ
+    db_register -> ctrl_register: T/báo không hợp lệ
+activate ctrl_register
+activate ui_register
+    ctrl_register -> ui_register: Y/cầu điền lại thông tin
+deactivate ui_register
+else #Yellow tên tài khoản và mật khẩu hợp lệ
+    db_register -> ctrl_register: T/báo hợp lệ
+deactivate ctrl_register
+
+
+group #SkyBlue Kiểm tra tồn tại [tên tài khoản và mật khẩu không tồn tại]
+    db_register -> db_register: Kiểm tra tồn tại
+    db_register -> ctrl_register: T/báo không tồn tại
+activate ui_register
+    ctrl_register -> ui_register: Y/cầu điền lại thông tin
+deactivate ui_register
+else #LightSeaGreen tên tài khoản và mật khẩu tồn tại
+activate ctrl_register
+    db_register -> ctrl_register: T/báo tồn tại
+deactivate db_register
+activate ui_register
+    ctrl_register -> ui_register: T/báo đăng kí thành công
+deactivate ui_register
+deactivate ctrl_register
+end
+end
+deactivate actor
+
+@enduml

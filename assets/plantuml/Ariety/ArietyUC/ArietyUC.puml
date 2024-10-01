@@ -19,7 +19,7 @@ note bottom of QLDMSP: Thêm/Sửa/Xóa danh mục
 
 'Kho hàng
 Usecase QLKHO as "Quản lý kho"
-note bottom of QLKHO : Nhập/Xuất/Kiểm kê kho
+note bottom of QLKHO: Nhập/Xuất/Kiểm kê kho
 (Xem hàng tồn kho) as XEM_HANG
 
 'Nhân viên

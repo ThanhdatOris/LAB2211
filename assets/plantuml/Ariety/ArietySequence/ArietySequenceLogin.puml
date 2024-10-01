@@ -1,0 +1,54 @@
+@startuml SequenceLogin
+actor "Quản lý/ NVBH/ KH" as actors
+boundary "Đăng nhập" as ui_login
+control "Đăng nhập" as ctrl_login
+database "Cơ sở dữ liệu" as db_login
+
+activate actors
+activate ui_login
+    actors -> ui_login: Nhập thông tin
+note right of actors
+tên tài khoản,
+mật khẩu
+end note
+    actors -> ui_login: Nhấn nút "Đăng nhập"
+    ui_login -> ctrl_login: Gửi thông tin
+deactivate ui_login
+
+activate ctrl_login
+    ctrl_login -> ctrl_login: Kiểm tra hợp lệ và tồn tại
+    ctrl_login -> db_login: Gửi thông tin
+activate db_login
+deactivate ctrl_login
+
+group #Pink Kiểm tra hợp lệ [tên tài khoản và mật khẩu không hợp lệ]
+    db_login -> db_login: Kiểm tra hợp lệ
+    db_login -> ctrl_login: T/báo không hợp lệ
+activate ctrl_login
+activate ui_login
+    ctrl_login -> ui_login: Y/cầu nhập lại thông tin
+deactivate ui_login
+else #Yellow tên tài khoản và mật khẩu hợp lệ
+    db_login -> ctrl_login: T/báo hợp lệ
+deactivate ctrl_login
+
+
+group #SkyBlue Kiểm tra tồn tại [tên tài khoản và mật khẩu không tồn tại]
+    db_login -> db_login: Kiểm tra tồn tại
+    db_login -> ctrl_login: T/báo không tồn tại
+activate ui_login
+    ctrl_login -> ui_login: Y/cầu đăng nhập nhập lại
+deactivate ui_login
+else #LightSeaGreen tên tài khoản và mật khẩu tồn tại
+activate ctrl_login
+    db_login -> ctrl_login: T/báo tồn tại
+deactivate db_login
+activate ui_login
+    ctrl_login -> ui_login: T/báo đăng nhập thành công
+deactivate ui_login
+deactivate ctrl_login
+end
+end
+deactivate actors
+
+@enduml

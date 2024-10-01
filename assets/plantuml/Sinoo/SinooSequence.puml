@@ -16,9 +16,9 @@ activate ui_addProduct
 ui_addProduct --> user: Hiển thị UI nhập sản phẩm
 user -> ui_addProduct: Nhập thông tin sản phẩm
 note right of user
-Thông tin sản phẩm:tên sản phẩm, giá, 
-đơn vị tính, chất liệu, kích thước, 
-tiêu chuẩn, màu sắc, kiểu loại, thương hiệu, 
+Thông tin sản phẩm:tên sản phẩm, giá,
+đơn vị tính, chất liệu, kích thước,
+tiêu chuẩn, màu sắc, kiểu loại, thương hiệu,
 bảo hành, mô tả, hình ảnh
 end note
 ui_addProduct -> ctrl_addProduct: Thông tin sản phẩm và nhấn "Lưu"
