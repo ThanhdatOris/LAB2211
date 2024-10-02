@@ -1,0 +1,35 @@
+@startuml SequenceDeleteProduct
+actor "Quản lý" as manager
+boundary "Giỏ hàng" as ui_cart
+control "Xóa sản phẩm" as ctrl_deleteproduct
+database "Cơ sở dữ liệu" as db_database
+
+activate ui_cart
+note right of manager
+Khi đăng nhập
+thành công.
+Hiển thị
+giao diện
+end note
+
+manager -> ui_cart: Chọn sản phẩm
+manager -> ui_cart: Nhấn nút "Xóa"
+
+ui_cart -> ctrl_deleteproduct: Gửi y/c xóa sản phẩm
+deactivate ui_cart
+activate ctrl_deleteproduct
+ctrl_deleteproduct -> ctrl_deleteproduct: Kiểm tra quyền hạn
+
+
+group #Pink Kiểm tra quyền hạn người dùng [vai trò hợp lệ]
+deactivate ctrl_deleteproduct
+ctrl_deleteproduct -> db_database: Gửi y/c xóa sp
+db_database -> db_database: Truy vấn
+db_database -> ctrl_deleteproduct: Xác nhận xóa sp
+ctrl_deleteproduct -> ui_cart: Thông báo "Xóa" thành công
+
+else #SkyBlue vai trò không hợp lệ
+ctrl_deleteproduct -> ui_cart: T/bao người dùng chưa đủ quyền
+end
+
+@enduml
