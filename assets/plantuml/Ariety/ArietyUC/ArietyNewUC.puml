@@ -12,87 +12,139 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 '--------------------------------------Chức năng--------------------------------------
 'QL tài khoản
 usecase QLTK as "Quản ký tài khoản"
-note bottom of QLTK: thêm, sửa, xóa thông tin cá nhân
+'note top of QLTK: thêm, sửa, xóa thông tin cá nhân
 (Đăng nhập) as DNhap
 (Đăng xuất) as DXuat
 (Đăng kí) as DKi
 (Đổi mật khẩu) as DMKhau
 
+DNhap  <.  DXuat: include
+DMKhau .> DNhap : extend
+
 'QL sản phẩm
 usecase QLSP as "Quản lý sản phẩm"
-note bottom of QLSP: thêm, sửa, xóa sản phẩm
+'note bottom of QLSP: thêm, sửa, xóa sản phẩm
 (Xem sản phẩm) as XemSP
 (Tìm sản phẩm) as TimSP
+TimSP <. XemSP: extend
+
 
 'QL danh mục sản phẩm
 usecase QLDMSP as "Quản lý danh mục sản phẩm"
-note bottom of QLDMSP: thêm, sửa, xóa danh mục
+'note bottom of QLDMSP: thêm, sửa, xóa danh mục
 (Xem danh mục) as XemDMSP
 (Tìm danh mục) as TimDMSP
+TimDMSP <. XemDMSP: extend
+
 
 'QL nhân viên
 usecase QLNV as "Quản lý nhân viên"
 note bottom of QLNV: thêm, sửa, xóa, tìm kiếm \nxem thông tin nhân viên
 
+
 'QL nhà cung cấp
 usecase QLNCC as "Quản lý nhà cung cấp"
-note bottom of QLNCC: thêm, sửa, xóa nhà cung cấp
+note top of QLNCC: thêm, sửa, xóa nhà cung cấp
 (Tìm nhà cung cấp) as TimNCC
+
 
 'QL đơn hàng
 usecase QLDH as "Quản lý đơn hàng"
 note bottom of QLDH: xem, tìm kiếm, thêm, sửa đơn hàng \nhủy, xác nhận đơn hàng và \ncập nhật trạng thái đơn hàng
+(Tìm đơn hàng) as TimDH
+(Xem đơn hàng) as XemDH
 (Theo dõi đơn hàng) as TheoDoiDH
+(Yêu cầu hủy đơn) as YCHuyDH
+TimDH <.. XemDH: extend
+QLDH <. YCHuyDH: extend
+QLDH <. TheoDoiDH: extend
 
 'QL giỏ hàng
 usecase QLGH as "Quản lý giỏ hàng"
-note bottom of QLGH: thêm, cập nhật số lượng, đặt hàng, xem lịch sử mua hàng, \ntheo dõi, yêu cầu hủy đơn hàng, \nxác nhận hoặc cập nhật thông tin liên hệ, địa chỉ giao hàng
+'note top of QLGH: thêm, cập nhật số lượng, đặt hàng, xem lịch sử mua hàng, \ntheo dõi, yêu cầu hủy đơn hàng, \nxác nhận hoặc cập nhật thông tin liên hệ, địa chỉ giao hàng
+(Xem giỏ hàng) as XemGH
 
 'QL phiếu nhập kho
 usecase QLPNKho as "Quản lý phiếu nhập kho"
-note bottom of QLPNKho: xem, tìm kiếm, tạo, cập nhật, hủy phiếu nhập kho, \ncập nhật số lượng tồn kho dựa trên đơn hàng và phiếu nhập
+'note top of QLPNKho: xem, tìm kiếm, tạo, cập nhật, hủy phiếu nhập kho, \ncập nhật số lượng tồn kho dựa trên đơn hàng và phiếu nhập
+(Xem số lượng tồn kho) as XemHT
+(Xem phiếu nhập kho) as XemPX
+(Tìm phiếu xuất kho) as TimPX
+TimPX <. XemPX
 
 'QL khách hàng
 usecase QLKH as "Quản lý khách hàng"
-
+(Quản lý khách hàng) as QLKH
+note top of QLKH: Thêm/ Sửa/ Xem/ Tìm khách hàng
 
 'QL báo cáo
-usecase QLBC as "Quản lý báo cáo"
-(Xem báo cáo) as XemBC
+'usecase QLBC as "Quản lý báo cáo"
+'note bottom of QLBC: xem báo cáo
 
-'----------------------------------------------------
-'Quản lý/ Chủ
-
-NVQL -> DNhap
-NVQL -> DXuat
-
+'----------------------HOẠT ĐỘNG----------------------
+'_____ Quản lý/ Chủ _____
 NVQL --> QLTK
-NVQL --> QLSP
-NVQL --> QLDMSP
-NVQL --> QLNV
-NVQL --> QLNCC
-NVQL --> QLDH
-NVQL --> QLKH
+NVQL -> QLSP
+NVQL -> QLDMSP
+NVQL -> QLNV
+NVQL -> QLNCC
+NVQL -> QLDH
+NVQL -> QLKH
 NVQL --> QLPNKho
-NVQL --> QLBC
+'NVQL -> QLBC
 
-'Nhân viên bán hàng
-DNhap <-- NVBH
-DXuat <-- NVBH
+'san pham
+QLSP <.. TimSP: extend
+'danh muc san pham
+QLDMSP <.. TimDMSP: extend
+'nhan vien
 
-QLTK <-- NVBH
-QLDMSP <-- NVBH
-QLDH <-- NVBH
+'nha cung cap
+QLNCC <. TimNCC: extend
+'don hang
+QLDH <. TimDH: extend
+'kho hang
+QLPNKho <. XemHT: extend
+'phieu xuat kho
+TimPX <-- NVBH
+'bao cao
 
-'Khách hàng
-DKi <--KH
-DNhap <-- KH
-DXuat <-- KH
+'_____ Đăng nhập/Đăng xuất/ Đăng kí _____
+'---Quản lý/Chủ---
+NVQL -> DNhap
 
-QLTK <-- KH
-QLGH <-- KH
+'---Nhân viên bán hàng---
+DNhap <- NVBH
 
+'---Khách hàng---
+DNhap <- KH
+DKi <- KH
 
+'_____ Nhân viên bán hàng _____
+QLTK <- NVBH
+QLDMSP <- NVBH
+QLDH <- NVBH
+
+'san pham
+TimSP <-- NVBH
+'danh muc san pham
+TimDMSP <-- NVBH
+'kho hang
+XemPX <- NVBH
+
+'_____ Khách hàng _____
+QLTK <- KH
+QLGH <- KH
+
+'san pham
+TimSP <-- KH
+'danh muc san pham
+TimDMSP <-- KH
+'gio hang
+XemGH <- KH
+'don hang
+YCHuyDH <- KH
+TheoDoiDH <- KH
 }
 
 @enduml
