@@ -8,6 +8,7 @@ activate actors
 activate ui_login
     actors -> ui_login: Nhập thông tin
 note right of actors
+Thông tin gồm:
 tên tài khoản,
 mật khẩu
 end note

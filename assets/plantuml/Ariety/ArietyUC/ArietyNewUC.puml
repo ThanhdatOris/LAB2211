@@ -1,4 +1,4 @@
-@startuml SinooUC
+@startuml ArietyUC
 
 skinparam shadowing false
 left to right direction
@@ -9,164 +9,89 @@ actor "Nhân Viên Bán Hàng" as NVBH
 
 rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng Thiên Ân" {
 
-'>>>>>>>>>>>>>>> Khai báo >>>>>>>>>>>>>>>
-'Tài khoản
-Usecase QLTK as "Quản lý tài khoản"
-note bottom of QLTK: Thêm/ Sửa/ Xem thông tin cá nhân
+'--------------------------------------Chức năng--------------------------------------
+'QL tài khoản
+usecase QLTK as "Quản ký tài khoản"
+note bottom of QLTK: thêm, sửa, xóa thông tin cá nhân
+(Đăng nhập) as DNhap
+(Đăng xuất) as DXuat
+(Đăng kí) as DKi
+(Đổi mật khẩu) as DMKhau
 
-'Danh mục 
-Usecase QLDM as "Quản lý danh mục"
-note bottom of QLDM: Thêm/ Sửa/ Xóa/ Xem/ Tìm danh mục
-(Xem danh mục) as XEM_DM
-(Tìm danh mục) as TIM_DM
- TIM_DM <.. XEM_DM: extend
+'QL sản phẩm
+usecase QLSP as "Quản lý sản phẩm"
+note bottom of QLSP: thêm, sửa, xóa sản phẩm
+(Xem sản phẩm) as XemSP
+(Tìm sản phẩm) as TimSP
 
-'Kho hàng
-Usecase QLKHO as "Quản lý phiếu nhập kho"
-note bottom of QLKHO : Xem/ Tìm/ Tạo/ Sửa/ Hủy phiếu nhập kho,  \nCập nhật số lượng tồn kho 
-(Xem số lượng tồn kho) as XEM_HANG
-(Xem phiếu xuất kho) as XEM_PXK
-(Tìm phiếu xuất kho) as TIM_PXK
-TIM_PXK <. XEM_PXK: extend
+'QL danh mục sản phẩm
+usecase QLDMSP as "Quản lý danh mục sản phẩm"
+note bottom of QLDMSP: thêm, sửa, xóa danh mục
+(Xem danh mục) as XemDMSP
+(Tìm danh mục) as TimDMSP
 
-'Nhân viên
-Usecase QLNV as "Quản lý nhân viên"
-note bottom of QLNV: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhân viên
+'QL nhân viên
+usecase QLNV as "Quản lý nhân viên"
+note bottom of QLNV: thêm, sửa, xóa, tìm kiếm \nxem thông tin nhân viên
 
-'Nhà cung cấp
-Usecase QLNCC as "Quản lý nhà cung cấp"
-note bottom of QLNCC: Thêm/ Sửa/ Xóa/ Xem/ Tìm nhà cung cấp
-' (Tìm nhà cung cấp) as TIM_NCC
+'QL nhà cung cấp
+usecase QLNCC as "Quản lý nhà cung cấp"
+note bottom of QLNCC: thêm, sửa, xóa nhà cung cấp
+(Tìm nhà cung cấp) as TimNCC
 
-'Báo cáo
-' (Quản lý báo cáo) as QLBC
-' note bottom of QLBC: Xem doanh thu, phí nhập, phí xuất hàng
+'QL đơn hàng
+usecase QLDH as "Quản lý đơn hàng"
+note bottom of QLDH: xem, tìm kiếm, thêm, sửa đơn hàng \nhủy, xác nhận đơn hàng và \ncập nhật trạng thái đơn hàng
+(Theo dõi đơn hàng) as TheoDoiDH
 
-'Khách hàng
-(Quản lý khách hàng) as QLKH
-note top of QLKH: Thêm/ Sửa/ Xem/ Tìm khách hàng
+'QL giỏ hàng
+usecase QLGH as "Quản lý giỏ hàng"
+note bottom of QLGH: thêm, cập nhật số lượng, đặt hàng, xem lịch sử mua hàng, \ntheo dõi, yêu cầu hủy đơn hàng, \nxác nhận hoặc cập nhật thông tin liên hệ, địa chỉ giao hàng
 
-'Đơn hàng
-Usecase QLDH as "Quản lý đơn hàng"
-note top of QLDH: Xem/ Tìm/ Tạo/ Sửa/ Hủy đơn hàng, \nXác nhận/ Theo dõi đơn hàng \nCập nhật trạng thái đơn hàng.
-(Tìm đơn) as TIM_DH
-(Xem đơn) as XEM_DH
-(Theo dõi đơn hàng) as THEO_DOI_DH
-(Yêu cầu hủy đơn hàng) as YCHUY_DH
-TIM_DH <. XEM_DH: extend
-QLDH <... YCHUY_DH: extend
-QLDH <.. THEO_DOI_DH: extend
+'QL phiếu nhập kho
+usecase QLPNKho as "Quản lý phiếu nhập kho"
+note bottom of QLPNKho: xem, tìm kiếm, tạo, cập nhật, hủy phiếu nhập kho, \ncập nhật số lượng tồn kho dựa trên đơn hàng và phiếu nhập
 
-'Sản phẩm
-Usecase QLSP as "Quản lý sản phẩm"
-note top of QLSP: Thêm/ Sửa/ Xóa sản phẩm
-(Xem sản phẩm) as XEM_SP
-(Tìm sản phẩm) as TIM_SP
-TIM_SP <. XEM_SP: extend
-
-'Giỏ hàng
-Usecase QLGH as "Quản lý giỏ hàng"
-note bottom of QLGH: Xem/ Thêm/ Sửa số lượng sp trong giỏ, \nXóa sp khỏi giỏ/ Tính tổng giá trị giỏ hàng, \nĐặt hàng/ Xem lịch sử mua hàng, \nTheo dõi đơn hàng/ Yêu cầu hủy đơn hàng, \nXác nhận đơn hàng/ Cập nhật thông tin liên hệ và \nđịa chỉ giao hàng.
-' (Xem giỏ hàng) as XEM_GH
-'  XEM_GH .>  QLGH: extend
+'QL khách hàng
+usecase QLKH as "Quản lý khách hàng"
 
 
-'Đăng nhập, đăng xuất
-(Đăng xuất) as Logout
-(Đăng nhập) as Login
-(Đăng kí) as SignUp
-(Đổi mật khẩu) as ChangePass
+'QL báo cáo
+usecase QLBC as "Quản lý báo cáo"
+(Xem báo cáo) as XemBC
 
-Login  <.  Logout: include
-ChangePass .> Login : extend
+'----------------------------------------------------
+'Quản lý/ Chủ
 
-'>>>>>>>>>>>>>>> Gán đối tượng >>>>>>>>>>>>>>
-QLDM ...> Login : include
-' QLBC ...> Login : include
-QLDH ...> Login : include
-' QLGH ...> Login : include
-QLSP ...> Login : include
-QLNCC ...> Login : include
-QLKH ...> Login : include
-QLNV ...> Login : include
-QLKHO ...> Login : include
-Login <..  QLGH: include
+NVQL -> DNhap
+NVQL -> DXuat
 
-'----------- Người Quản lý -----------
+NVQL --> QLTK
 NVQL --> QLSP
-NVQL ---> QLDM
-NVQL --> QLKHO
+NVQL --> QLDMSP
 NVQL --> QLNV
 NVQL --> QLNCC
-' NVQL --> QLBC
-NVQL --> QLKH 
-NVQL --> QLDH 
-NVQL --> QLTK 
+NVQL --> QLDH
+NVQL --> QLKH
+NVQL --> QLPNKho
+NVQL --> QLBC
 
-'Tài khoản
-' NVQL ---> Login
+'Nhân viên bán hàng
+DNhap <-- NVBH
+DXuat <-- NVBH
 
-'Sản phẩm
-QLSP <... TIM_SP: extend
-
-'Danh mục sp
-QLDM <.. TIM_DM: extend
-
-'Kho hàng
-QLKHO <... XEM_HANG: extend
-QLKHO <... TIM_PXK: extend
-
-'Nhân viên
-
-'Nhà cung cấp
-' QLNCC <.. TIM_NCC: extend
-
-'Báo cáo
+QLTK <-- NVBH
+QLDMSP <-- NVBH
+QLDH <-- NVBH
 
 'Khách hàng
+DKi <--KH
+DNhap <-- KH
+DXuat <-- KH
 
-'Đơn hàng
-QLDH <.. TIM_DH: extend
-
-'----------- Nhân Viên Bán Hàng -----------
-QLDH <- NVBH
-QLKH <-- NVBH
-QLTK <-- NVBH
-'Tài khoản
-' Login <--- NVBH
-
-'Kho
-XEM_HANG <-- NVBH
-
-'Danh mục
-TIM_DM <-- NVBH
-
-'Kho hàng
-TIM_PXK <--- NVBH
-
-'Sản phẩm
-TIM_SP <-- NVBH
-
-'----------- Khách Hàng -----------
-QLGH <-- KH
 QLTK <-- KH
+QLGH <-- KH
 
-'Tài khoản
-SignUp <- KH
-' Login <-- KH
-
-'Giỏ hàng
-' XEM_GH <-- KH
-
-'Sản phẩm
-TIM_SP <---- KH
-
-'Danh mục
-TIM_DM <--- KH
-
-'Đơn hàng
-YCHUY_DH <-- KH
-THEO_DOI_DH <-- KH
 
 }
 
