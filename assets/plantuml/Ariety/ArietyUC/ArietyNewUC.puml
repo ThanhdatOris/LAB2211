@@ -120,6 +120,18 @@ DNhap <- NVBH
 DNhap <- KH
 DKi <- KH
 
+'---Chức năng---
+'DNhap <- QLTK: include
+'DNhap <- QLSP: include
+'QLDMSP <- DNhap: include
+'QLNV <- DNhap: include
+'QLNCC <- DNhap: include
+'QLDH <- DNhap: include
+'QLGH <- DNhap: include
+'QLPNKho <- DNhap: include
+'QLKH <- DNhap: include
+
+
 '_____ Nhân viên bán hàng _____
 QLTK <- NVBH
 QLDMSP <- NVBH
@@ -133,18 +145,18 @@ TimDMSP <-- NVBH
 XemPX <- NVBH
 
 '_____ Khách hàng _____
-QLTK <- KH
-QLGH <- KH
+QLTK <-- KH
+QLGH <-- KH
 
 'san pham
 TimSP <-- KH
 'danh muc san pham
 TimDMSP <-- KH
 'gio hang
-XemGH <- KH
+XemGH <-- KH
 'don hang
-YCHuyDH <- KH
-TheoDoiDH <- KH
+YCHuyDH <-- KH
+TheoDoiDH <-- KH
 }
 
 @enduml
