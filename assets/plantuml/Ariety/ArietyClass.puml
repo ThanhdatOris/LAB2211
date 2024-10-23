@@ -57,13 +57,14 @@ class Product {
     + warrantyPeriod : string
     + description: string
     + image: list<string>
-    + acitive: bool
+    + active: bool
     'Method
 }
 
 class Cart {
     + id: string
     + totalPrice: double
+    + totalQuantity: double
     'Method
     + AddItem(): void
     + RemoveItem(): void
@@ -81,8 +82,10 @@ class Order {
     + id: string
     + customerPhoneNumber: string
     + totalPrice: double
-    + orderDate: date
+    + orderDate: datetime
     + orderStatus: int
+    + paymentStatus: string
+    + paymentMethod: string
 
     'Method
     + PlaceOrder(): void
@@ -107,13 +110,9 @@ class Invoice {
 
 
 class Supplier {
-    + id: string
-    + displayName: string
-    + address: string
     + email: string
-    + phoneNumber: string
     + image: string
-    + acitive: bool
+    + active: bool
     'Method
 
 }
@@ -140,7 +139,7 @@ class Category {
     + roomType: string
     + usageType : string
     + description: string
-    + acitive: bool
+    + active: bool
 }
 
 
