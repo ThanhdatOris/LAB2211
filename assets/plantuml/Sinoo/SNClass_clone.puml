@@ -1,7 +1,6 @@
 @startuml Class
 
-left to right direction
-
+top to bottom direction
 skinparam {
     shadowing false
     backgroundColor #FFFFFF/#FEFEFE
@@ -20,8 +19,6 @@ skinparam {
 }
 
 ' --------------- ACTOR ---------------
-' Define user-related classes
-
 class User {
     + id: String
     + fullName: String
@@ -38,6 +35,8 @@ class User {
 
 class Manager {
     + citizenId: String
+    + issuingDate: Date
+    + issuingPlace: String
 
     + changeInfo(): void
 }
@@ -56,10 +55,9 @@ class Customer {
 }
 
 ' --------------- UC ---------------
-' Define product-related classes
 
 class Product {
-    + id: String
+    + id: Int
     + name: String
     + price: Double
     + unit: String
@@ -67,41 +65,47 @@ class Product {
     + dimension: String
     + standard: String
     + color: String
-    + type: String
     + brand: String
     + warrantyPeriod: String
     + description: String
+    + mainImg: String
     + images: List<String>
-    + active: Boolean
+    + CreatedDate: Date
+    + isActive: Boolean
+    + isImport: Boolean
 }
 
 '--- Export ---
 ' Define cart-related classes
 
-class Cart {
-    + id: String
-    + totalPrice: Double
+' class Cart {
+'     + id: Int
+'     + totalPrice: Double
+'     + totalQuantity: Int
 
-    + addItem(): void
-    + removeItem(): void
-    + calculateTotal(): void
-    + clearCart(): void
-}
+'     + addItem(): void
+'     + removeItem(): void
+'     + calculateTotal(): void
+'     + clearCart(): void
+' }
 
-class CartItem {
-    + id: String
-    + quantity: Int
-    + price: Double
-}
+' class CartDetail {
+'     + id: Int
+'     + quantity: Int
+'     + price: Double
+' }
 
 class Order {
-    + id: String
+    + id: Int
     + customerPhoneNumber: String
     + totalPrice: Double
+    + totalQuantity: Int
+    + note: String
+    + address: String
     + orderDate: Date
     + orderStatus: Int
-    + paymentStatus: String
-    + paymentMethod: String
+    + paymentMethod: Int
+    + paymentStatus: Int
     + invoiceNumber: String
     + invoiceDate: Date
 
@@ -111,71 +115,66 @@ class Order {
     + generateInvoice(): void
 }
 
-class OrderItem {
-    + id: String
-    + productName: String
+class OrderDetail {
+    + id: Int
     + priceAtOrder: Double
-    + subtotal: Double
+    + quantity: Int
     + quantity: Int
 }
 
 '--- Import ---
-' Define supplier and goods received classes
-
 class Supplier {
-    + id: String
+    + id: Int
     + displayName: String
     + address: String
     + email: String
     + phoneNumber: String
     + image: String
-    + active: Boolean
+    + isActive: Boolean
 }
 
 class Shipment {
-    + id: String
+    + id: Int
     + receiptDate: Date
     + totalPrice: Double
-    + totalQuantity: Double
+    + totalQuantity: int
     + note: String
 }
 
 class Goods {
-    + id: String
+    + id: Int
     + quantity: Int
     + importPrice: Double
     + totalPrice: Double
 }
 
 class Category {
-    + id: String
+    + id: Int
     + parentId: Int
     + name: String
-    + roomType: String
-    + usageType: String
-    + description: String
-    + active: Boolean
+    + image: String
+    + slug: String
+    + isActive: Boolean
 }
 
-'-------------------------Connection-------------------------
-' Define relationships between classes
+'--------------------Connection--------------------
 
 Product "0..*" o-up-- "1" Category : belongs to
-Product "0..*" -down- "1..*" Cart : contains
-(Cart, Product) . CartItem : consists of
-Product "0..*" -down-- "0..*" Order : includes
-(Product, Order) .. OrderItem : contains
-Product "0..*" -left-- "0..*" Shipment : part of
+' Product "0..*" -down- "1..*" Cart : contains
+' (Cart, Product) . CartDetail : consists of
+Product "1..*" -down- "0..*" Order : includes
+(Product, Order) .. OrderDetail : contains
+Product "1..*" -left-- "0..*" Shipment : part of
 (Shipment, Product) . Goods : consists of
 
-Shipment "1..n" -up-- "1" Supplier : supplied by
-Shipment "0..*" -up-- "1" Manager : managed by
+Shipment "1..*" -up-- "1" Supplier : supplied by
+Shipment "1..*" -up-- "1" Manager : managed by
 
-Cart "1" -down-- "1" Customer : owned by
-Cart "1" -right- "1" Order : checkout
+' Cart "1" -down-- "1" Customer : owned by
+' Cart "1" -right- "1" Order : checkout
 
-Order "0..*" -left-- "1" Customer : has
-Order "0..*" -right-- "1" SaleStaff : created by
+Order "0..*" -down-- "1" Customer : has
+Order "0..*" -left-- "1" SaleStaff : created by
 
 Category "1..*" -right-- "1" Manager : managed by
 

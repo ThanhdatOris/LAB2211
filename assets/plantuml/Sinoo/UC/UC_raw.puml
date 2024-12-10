@@ -61,7 +61,7 @@ rectangle "Hệ thống quản lý bán hàng và kho vật liệu xây dựng T
 
     'Đăng nhập, đăng xuất
     (Đăng xuất) as Logout
-    (Đăng nhập) as Login
+    (Đăng nhập) as Login    
     (Đăng kí) as SignUp
     (Đổi mật khẩu) as ChangePass
 
