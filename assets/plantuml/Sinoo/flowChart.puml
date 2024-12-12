@@ -1,0 +1,31 @@
+@startuml Create Image Product
+start
+
+' :Thiết lập giá trị mặc định;
+' note right: IsImport = false, \nIsActive = true, \nCreatedDate = DateNow
+
+if (MainImage != null && MainImage.Length > 0) then (Có)
+    :Liên kết thư mục lưu ảnh;
+    :Random lại tên tệp từ GUID;
+    :Lưu MainImage vào thư mục;
+    :Lưu tên tệp vào tbl:Products;
+else (Không)
+    :Gán MainImg = "default.png";
+endif
+
+:Thêm sản phẩm vào CSDL;
+
+if (ImageUploadSub != null && ImageUploadSub.Count > 0) then (Có)
+    :Lặp qua từng tệp trong danh sách;
+    if (ImageItem.Length > 0) then (Có)
+        :Liên kết mục lưu ảnh phụ;
+        :Tạo tên tệp từ GUID;
+        :Lưu tệp vào thư mục;
+        :Lưu tên tệp vào tbl:ProductImages;
+    endif
+endif
+
+:Lưu thay đổi vào CSDL;
+
+stop
+@enduml

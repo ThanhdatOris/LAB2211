@@ -1,7 +1,3 @@
-/'======================
-    Bắt đầu version 1
-======================='/
-
 @startuml
 
 skinparam shadowing false
